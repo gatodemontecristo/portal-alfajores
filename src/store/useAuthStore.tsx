@@ -6,7 +6,7 @@ import {
   signOut,
   User,
 } from 'firebase/auth';
-import { auth } from '../firebase';
+import { FirebaseAuth as auth } from '../firebase';
 import { persist } from 'zustand/middleware';
 
 export interface AuthStoreProps {
