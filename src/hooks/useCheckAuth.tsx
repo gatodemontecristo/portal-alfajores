@@ -8,6 +8,7 @@ export const useCheckAuth = () => {
   useEffect(() => {
     checkAuth();
   }, []);
+  console.log(status);
   return {
     status,
   };

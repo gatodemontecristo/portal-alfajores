@@ -46,8 +46,8 @@ const useAuthStore = create(
         }
       },
       checkAuth: () => {
-        set({ status: 'loading' });
-        onAuthStateChanged(auth, (user) => {
+        // set({ status: 'loading' });
+        onAuthStateChanged(auth, async (user) => {
           if (user) {
             set({ user, status: 'authenticated' });
           } else {
