@@ -2,7 +2,7 @@ import { Navigate } from 'react-router-dom';
 import { StatisticsPage } from '../pages';
 
 export const StatisticChildRoutes = [
-  { path: 'statistics', element: <StatisticsPage></StatisticsPage> },
-  { path: '/*', element: <Navigate to="/statistics" /> },
-  { path: '/', element: <Navigate to="/statistics" /> },
+  { path: 'page', element: <StatisticsPage></StatisticsPage> },
+  { path: '/statistics/*', element: <Navigate to="/statistics/page" /> },
+  { path: '/statistics/', element: <Navigate to="/statistics/page" /> },
 ];
