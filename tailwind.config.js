@@ -13,7 +13,7 @@ export default {
       pinkberry: '#ffd2d2'
     },
     fontFamily: {
-      Monserrat: ["Monserrat", "sans-serif"],
+      Sonoma:['BR Sonoma', 'Helvetica', 'Arial', 'sans-serif'],
     },
     extend: {},
   },
