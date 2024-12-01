@@ -1,4 +1,6 @@
-import { DonnutGraphic, UserOwe } from '../components';
+import { mockUsers } from '../../mock';
+import { DonnutGraphic, UserAlert } from '../components';
+import { nanoid } from 'nanoid';
 export const StatisticsPage = () => {
   const data = [
     {
@@ -39,11 +41,13 @@ export const StatisticsPage = () => {
       </div>
       <div className="w-1/3 h-full flex items-center justify-center">
         <div className="flex flex-row items-center flex-wrap justify-center gap-4">
-          <UserOwe></UserOwe>
-          <UserOwe></UserOwe>
-          <UserOwe></UserOwe>
-          <UserOwe></UserOwe>
-          <UserOwe></UserOwe>
+          {mockUsers.map((user) => (
+            <UserAlert {...{ user }} key={nanoid()}>
+              <UserAlert.Image />
+              <UserAlert.Info />
+              <UserAlert.Date />
+            </UserAlert>
+          ))}
         </div>
       </div>
       <div className="w-1/3 h-full bg-slate-600"></div>
