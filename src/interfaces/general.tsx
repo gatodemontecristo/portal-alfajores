@@ -8,6 +8,7 @@ export interface UserProps {
   user: string;
   genre: 'male' | 'female';
   amount: number;
+  color: string;
   dates: DataTagsProps[];
 }
 
