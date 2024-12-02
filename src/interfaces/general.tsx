@@ -8,6 +8,7 @@ export interface UserProps {
   user: string;
   genre: 'male' | 'female';
   amount: number;
+  color: string;
   dates: DataTagsProps[];
 }
 
@@ -18,4 +19,11 @@ export interface UserContextProps {
 export interface UserAlertProps {
   user: UserProps;
   children?: ReactElement | ReactElement[];
+}
+
+export interface UserAlertHOCProps {
+  ({ children, user }: UserAlertProps): JSX.Element;
+  Image: () => JSX.Element;
+  Info: () => JSX.Element;
+  Date: () => JSX.Element;
 }

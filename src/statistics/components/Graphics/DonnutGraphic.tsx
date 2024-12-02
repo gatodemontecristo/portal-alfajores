@@ -15,7 +15,7 @@ export const DonnutGraphic = ({ data }: DataDonnutGraphic) => {
   return (
     <ResponsivePie
       data={data}
-      margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+      margin={{ top: 40, right: 40, bottom: 40, left: 80 }}
       innerRadius={0.5}
       padAngle={0.7}
       cornerRadius={3}
@@ -27,6 +27,7 @@ export const DonnutGraphic = ({ data }: DataDonnutGraphic) => {
       }}
       arcLinkLabelsSkipAngle={10}
       arcLinkLabelsTextColor="#333333"
+      arcLinkLabelsStraightLength={0}
       arcLinkLabelsThickness={2}
       arcLinkLabelsColor={{ from: 'color' }}
       arcLabelsSkipAngle={10}
@@ -106,16 +107,16 @@ export const DonnutGraphic = ({ data }: DataDonnutGraphic) => {
       ]}
       legends={[
         {
-          anchor: 'bottom',
+          anchor: 'top',
           direction: 'row',
           justify: false,
           translateX: 0,
-          translateY: 56,
+          translateY: 40,
           itemsSpacing: 0,
-          itemWidth: 100,
+          itemWidth: 50,
           itemHeight: 18,
           itemTextColor: '#999',
-          itemDirection: 'left-to-right',
+          itemDirection: 'top-to-bottom',
           itemOpacity: 1,
           symbolSize: 18,
           symbolShape: 'circle',

@@ -5,6 +5,7 @@ export const mockUsers: UserProps[] = [
     user: 'Juan',
     amount: 20,
     genre: 'male',
+    color: 'hsl(307, 70%, 50%)',
     dates: [
       {
         date: '07/11',
@@ -24,6 +25,7 @@ export const mockUsers: UserProps[] = [
     user: 'Rosa',
     amount: 24,
     genre: 'female',
+    color: 'hsl(60, 70%, 50%)',
     dates: [
       {
         date: '07/11',
