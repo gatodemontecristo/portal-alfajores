@@ -1,4 +1,4 @@
-import { UserProps } from '../interfaces';
+import { DataHistoryProps, UserProps } from '../interfaces';
 
 export const mockUsers: UserProps[] = [
   {
@@ -39,6 +39,24 @@ export const mockUsers: UserProps[] = [
         date: '17/11',
         over9: true,
       },
+    ],
+  },
+];
+
+export const mockHistory: DataHistoryProps[] = [
+  {
+    date: '07/11',
+    users: [
+      { user: 'Juan', over9: true },
+      { user: 'Pepe', over9: false },
+    ],
+  },
+  {
+    date: '08/11',
+    users: [
+      { user: 'Juan', over9: false },
+      { user: 'Pepe', over9: true },
+      { user: 'Rosa', over9: false },
     ],
   },
 ];

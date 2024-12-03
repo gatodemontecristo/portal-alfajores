@@ -4,6 +4,16 @@ export interface DataTagsProps {
   date: string;
   over9: boolean;
 }
+
+export interface DataColumnProps {
+  user: string;
+  over9: boolean;
+}
+
+export interface DataHistoryProps {
+  date: string;
+  users: DataColumnProps[];
+}
 export interface UserProps {
   user: string;
   genre: 'male' | 'female';
