@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { DataColumnProps, DataTagsProps } from '../../interfaces';
 import { mockHistory, mockUsers } from '../../mock';
 import { DonnutGraphic, UserAlert } from '../components';
@@ -69,13 +70,35 @@ export const StatisticsPage = () => {
   //     color: 'hsl(109, 70%, 50%)',
   //   },
   // ];
+  const [isLate, setIsLate] = useState(true);
 
+  const handleToggle = () => {
+    setIsLate(!isLate);
+  };
   return (
     <div className="w-full flex flex-row pt-[40px]">
       <div className="w-1/3 h-full">
         <DonnutGraphic data={mapUsers()} />
       </div>
-      <div className="w-1/3 h-full flex items-center justify-center">
+      <div className="w-1/3 h-full flex flex-col  items-center justify-center">
+        <div className="flex items-start justify-center ">
+          <button
+            onClick={handleToggle}
+            className={`px-4 py-2 rounded-l-md ${
+              isLate ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'
+            }`}
+          >
+            Tardones
+          </button>
+          <button
+            onClick={handleToggle}
+            className={`px-4 py-2 rounded-r-md ${
+              !isLate ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'
+            }`}
+          >
+            Puntuales
+          </button>
+        </div>
         <div className="flex flex-row items-center flex-wrap justify-center gap-4">
           {mockUsers.map((user) => (
             <UserAlert {...{ user }} key={nanoid()}>
