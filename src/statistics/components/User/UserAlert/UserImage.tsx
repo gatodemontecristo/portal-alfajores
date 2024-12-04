@@ -5,7 +5,7 @@ export const UserImage = () => {
   const { user } = useContext(UserContext);
 
   return (
-    <div className="flex w-[120px] border-solid border-8 border-[#fdbd22] rounded-full p-3">
+    <div className="flex w-full border-solid border-8 border-[#fdbd22] rounded-full p-3">
       <img
         src={`../people/${user.genre === 'female' ? 'mujer' : 'hombre'}.png`}
         alt=""
