@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import { DataColumnProps, DataTagsProps } from '../../interfaces';
 
-import { ChocolateGraphic, DonnutGraphic, UserAlert } from '../components';
+import {
+  ChocolateGraphic,
+  DonnutGraphic,
+  ToogleButton,
+  UserAlert,
+} from '../components';
 import { nanoid } from 'nanoid';
 import { mockHistory, mockUsers } from '../../mock';
 export const StatisticsPage = () => {
@@ -81,26 +86,17 @@ export const StatisticsPage = () => {
             Gráficos
           </p>
           <div>
-            <button
-              onClick={handleToggleGraphic}
-              className={`px-4 py-2 font-bold rounded-l-md ${
-                isCandy
-                  ? 'bg-amber-500 text-white'
-                  : 'bg-gray-200 text-gray-700'
-              }`}
-            >
-              <img className="h-8 w-8 " src="../icons/gogosi.png" alt="" />
-            </button>
-            <button
-              onClick={handleToggleGraphic}
-              className={`px-4 py-2 font-bold  rounded-r-md ${
-                !isCandy
-                  ? 'bg-amber-500 text-white'
-                  : 'bg-gray-200 text-gray-700'
-              }`}
-            >
-              <img className="h-8 w-8 " src="../icons/chocolate.png" alt="" />
-            </button>
+            <ToogleButton
+              handleToggle={handleToggleGraphic}
+              isAction={isCandy}
+              children1={
+                <img className="h-8 w-8 " src="../icons/gogosi.png" alt="" />
+              }
+              children2={
+                <img className="h-8 w-8 " src="../icons/chocolate.png" alt="" />
+              }
+              color="bg-amber-500"
+            />
           </div>
         </div>
         <div className="flex flex-col h-[90%] ">
@@ -113,22 +109,12 @@ export const StatisticsPage = () => {
       </div>
       <div className="w-1/3 flex flex-col relative items-center justify-start gap-5">
         <div className="h-[10%] top-0  pt-[20px]">
-          <button
-            onClick={handleToggle}
-            className={`px-4 py-2 font-bold rounded-l-md ${
-              isLate ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-700'
-            }`}
-          >
-            Tardones
-          </button>
-          <button
-            onClick={handleToggle}
-            className={`px-4 py-2 font-bold  rounded-r-md ${
-              !isLate ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-700'
-            }`}
-          >
-            Puntuales
-          </button>
+          <ToogleButton
+            handleToggle={handleToggle}
+            isAction={isLate}
+            children1={<span>Tardones</span>}
+            children2={<span>Puntuales</span>}
+          />
         </div>
         <div className="flex flex-row items-center  justify-center  flex-wrap  gap-4 overflow-y-scroll custom-scrollbar">
           {mockUsers
