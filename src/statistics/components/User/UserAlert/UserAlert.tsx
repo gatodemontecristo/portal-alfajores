@@ -12,7 +12,7 @@ export const UserAlert = ({ user, children }: UserAlertProps) => {
         user,
       }}
     >
-      <div>{children}</div>
+      <div className="flex flex-col items-center w-1/4">{children}</div>
     </Provider>
   );
 };

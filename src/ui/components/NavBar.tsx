@@ -10,7 +10,7 @@ export const NavBar = () => {
             Spring Actual
           </p>
         </button>
-        <button className="p-3  w-[120px] flex flex-col items-center group">
+        {/* <button className="p-3  w-[120px] flex flex-col items-center group">
           <div className="flex group-hover:bg-pinkberry rounded-md p-3">
             <img
               className="h-10 w-10 "
@@ -21,7 +21,7 @@ export const NavBar = () => {
           <p className="text-center text-black text-[13px]	mt-1 font-semibold">
             Historial
           </p>
-        </button>
+        </button> */}
       </ul>
     </nav>
   );

@@ -10,7 +10,7 @@ const UserInfoTitle = ({ title }: { title: string }) => {
 const UserInfoSubTitle = ({ money }: { money: number }) => {
   return (
     <p className="text-center text-black text-[16px] font-normal">
-      Desde: S/.{money}
+      {money == 0 ? 'Compitiendo' : `Debe: S/.${money}`}
     </p>
   );
 };

@@ -5,8 +5,8 @@ import { CheckingAuth } from '../ui';
 import { AuthChildRoutes, AuthRoutes } from '../auth';
 import { PaymentChildRoutes, PaymentRoutes } from '../payments';
 import { StatisticChildRoutes, StatisticRoutes } from '../statistics';
-import useAuthStore from '../store/useAuthStore';
-import { useEffect } from 'react';
+// import useAuthStore from '../store/useAuthStore';
+// import { useEffect } from 'react';
 
 export const CreateRouter = () => {
   const { status } = useCheckAuth();
