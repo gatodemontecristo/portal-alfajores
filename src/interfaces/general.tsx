@@ -20,6 +20,7 @@ export interface UserProps {
   amount: number;
   color: string;
   dates: DataTagsProps[];
+  img: string | null;
 }
 
 export interface UserContextProps {

@@ -6,6 +6,7 @@ export const mockUsers: UserProps[] = [
     amount: 20,
     genre: 'male',
     color: 'hsl(204, 70%, 50%)',
+    img: null,
     dates: [
       {
         date: '27/11',
@@ -26,6 +27,8 @@ export const mockUsers: UserProps[] = [
     amount: 0,
     genre: 'male',
     color: 'hsl(83, 70%, 50%)',
+    img: null,
+
     dates: [],
   },
   {
@@ -33,6 +36,8 @@ export const mockUsers: UserProps[] = [
     amount: 0,
     genre: 'male',
     color: 'hsl(8, 70%, 50%)',
+    img: null,
+
     dates: [],
   },
   {
@@ -40,6 +45,8 @@ export const mockUsers: UserProps[] = [
     amount: 0,
     genre: 'male',
     color: 'hsl(272, 70%, 50%)',
+    img: null,
+
     dates: [],
   },
   {
@@ -47,6 +54,8 @@ export const mockUsers: UserProps[] = [
     amount: 15,
     genre: 'male',
     color: 'hsl(103, 70%, 50%)',
+    img: '../people/cubo.jpg',
+
     dates: [
       {
         date: '27/11',
@@ -63,6 +72,8 @@ export const mockUsers: UserProps[] = [
     amount: 0,
     genre: 'female',
     color: 'hsl(178, 70%, 50%)',
+    img: '../people/gato_brujo.png',
+
     dates: [],
   },
   {
@@ -70,6 +81,8 @@ export const mockUsers: UserProps[] = [
     amount: 0,
     genre: 'female',
     color: 'hsl(254, 70%, 50%)',
+    img: null,
+
     dates: [],
   },
   {
@@ -77,13 +90,16 @@ export const mockUsers: UserProps[] = [
     amount: 0,
     genre: 'female',
     color: 'hsl(345, 70%, 50%)',
+    img: '../people/airplane.png',
     dates: [],
   },
   {
-    user: 'Miluzca',
+    user: 'Miluska',
     amount: 0,
     genre: 'female',
     color: 'hsl(169, 70%, 50%)',
+    img: '../people/picachu_fbi.jpeg',
+
     dates: [],
   },
   {
@@ -91,6 +107,7 @@ export const mockUsers: UserProps[] = [
     amount: 10,
     genre: 'male',
     color: 'hsl(8, 70%, 50%)',
+    img: null,
     dates: [
       {
         date: '02/12',
@@ -103,6 +120,7 @@ export const mockUsers: UserProps[] = [
     amount: 15,
     genre: 'female',
     color: 'hsl(72, 70%, 50%)',
+    img: null,
     dates: [
       {
         date: '02/12',
@@ -119,6 +137,7 @@ export const mockUsers: UserProps[] = [
     amount: 20,
     genre: 'male',
     color: 'hsl(245, 70%, 50%)',
+    img: null,
     dates: [
       {
         date: '02/12',

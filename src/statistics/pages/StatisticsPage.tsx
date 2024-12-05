@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { DataColumnProps, DataTagsProps } from '../../interfaces';
-import { mockHistory, mockUsers } from '../../mock';
+
 import { ChocolateGraphic, DonnutGraphic, UserAlert } from '../components';
 import { nanoid } from 'nanoid';
+import { mockHistory, mockUsers } from '../../mock';
 export const StatisticsPage = () => {
   const calculateTotalAmount = (
     data: DataTagsProps[] | DataColumnProps[],
@@ -64,38 +65,6 @@ export const StatisticsPage = () => {
       .join(', ');
   };
 
-  // const data = [
-  //   {
-  //     id: 'ruby',
-  //     label: 'ruby',
-  //     value: 295,
-  //     color: 'hsl(307, 70%, 50%)',
-  //   },
-  //   {
-  //     id: 'javascript',
-  //     label: 'javascript',
-  //     value: 3,
-  //     color: 'hsl(60, 70%, 50%)',
-  //   },
-  //   {
-  //     id: 'elixir',
-  //     label: 'elixir',
-  //     value: 391,
-  //     color: 'hsl(15, 70%, 50%)',
-  //   },
-  //   {
-  //     id: 'scala',
-  //     label: 'scala',
-  //     value: 476,
-  //     color: 'hsl(251, 70%, 50%)',
-  //   },
-  //   {
-  //     id: 'go',
-  //     label: 'go',
-  //     value: 274,
-  //     color: 'hsl(109, 70%, 50%)',
-  //   },
-  // ];
   const [isLate, setIsLate] = useState(true);
   const handleToggle = () => {
     setIsLate(!isLate);
@@ -105,10 +74,10 @@ export const StatisticsPage = () => {
     setIsCandy(!isCandy);
   };
   return (
-    <div className="w-full flex flex-row pt-[40px]">
-      <div className="w-1/3 h-full relative pt-[40px]">
-        <div className="absolute flex flex-row justify-between w-full top-0 right-0 pt-[20px] z-50 px-5">
-          <p className="ms-5 font-extrabold text-[35px] h-[10%] text-[#ffb400] ">
+    <div className="w-full flex flex-row pt-[40px] h-[80vh]">
+      <div className="w-1/3  relative ">
+        <div className=" flex flex-row justify-between w-full top-0 right-0 pt-[20px] z-50 px-5 h-[10%]  ">
+          <p className="ms-5 font-extrabold text-[35px] text-[#ffb400] ">
             Gráficos
           </p>
           <div>
@@ -134,14 +103,16 @@ export const StatisticsPage = () => {
             </button>
           </div>
         </div>
-        {isCandy ? (
-          <DonnutGraphic data={mapUsersDonnut()} />
-        ) : (
-          <ChocolateGraphic data={mapUsersChoco()}></ChocolateGraphic>
-        )}
+        <div className="flex flex-col h-[90%] ">
+          {isCandy ? (
+            <DonnutGraphic data={mapUsersDonnut()} />
+          ) : (
+            <ChocolateGraphic data={mapUsersChoco()}></ChocolateGraphic>
+          )}
+        </div>
       </div>
-      <div className="w-1/3 flex flex-col relative items-center justify-center h-full ">
-        <div className="absolute top-0  pt-[20px]">
+      <div className="w-1/3 flex flex-col relative items-center justify-start gap-5">
+        <div className="h-[10%] top-0  pt-[20px]">
           <button
             onClick={handleToggle}
             className={`px-4 py-2 font-bold rounded-l-md ${
@@ -159,7 +130,7 @@ export const StatisticsPage = () => {
             Puntuales
           </button>
         </div>
-        <div className="flex flex-row items-center justify-center flex-wrap   h-[450px] gap-4 overflow-y-scroll custom-scrollbar">
+        <div className="flex flex-row items-center  justify-center  flex-wrap  gap-4 overflow-y-scroll custom-scrollbar">
           {mockUsers
             .filter((user) =>
               isLate ? user.dates.length > 0 : user.dates.length == 0,
@@ -173,11 +144,11 @@ export const StatisticsPage = () => {
             ))}
         </div>
       </div>
-      <div className="w-1/3 h-full p-5">
+      <div className="w-1/3  p-5">
         <p className="ms-5 font-extrabold text-[35px] h-[10%] text-[#ffb400] ">
           Historial
         </p>
-        <div className="flex flex-col bg-[#ffffffc5] h-[450px] p-5 gap-2 rounded-xl  ">
+        <div className="flex flex-col bg-[#ffffffc5] h-[90%] p-5 gap-2 rounded-xl  ">
           <div className="flex flex-row w-full mb-2 border-b-2 border-black">
             <p className="font-bold text-[20px] w-1/5">Fecha</p>
             <p className="font-bold text-[20px] w-3/5">Personas</p>

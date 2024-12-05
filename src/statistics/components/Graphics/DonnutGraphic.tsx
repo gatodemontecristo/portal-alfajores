@@ -107,7 +107,7 @@ export const DonnutGraphic = ({ data }: DataDonnutGraphic) => {
       ]}
       legends={[
         {
-          anchor: 'top',
+          anchor: 'bottom',
           direction: 'row',
           justify: false,
           translateX: 0,
@@ -116,7 +116,7 @@ export const DonnutGraphic = ({ data }: DataDonnutGraphic) => {
           itemWidth: 50,
           itemHeight: 18,
           itemTextColor: '#999',
-          itemDirection: 'top-to-bottom',
+          itemDirection: 'bottom-to-top',
           itemOpacity: 1,
           symbolSize: 18,
           symbolShape: 'circle',
