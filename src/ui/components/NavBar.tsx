@@ -1,6 +1,6 @@
 export const NavBar = () => {
   return (
-    <nav className=" w-auto bg-secondary text-white flex flex-col justify-center">
+    <nav className=" w-auto bg-secondary text-white hidden flex-col justify-center md:flex ">
       <ul className="flex flex-col gap-0">
         <button className="p-3  w-[120px] flex flex-col items-center group">
           <div className="flex group-hover:bg-pinkberry rounded-md p-3">

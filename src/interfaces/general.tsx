@@ -1,4 +1,5 @@
 import { ReactElement } from 'react';
+import { TableHeaderProps } from '../statistics/components/TableInfo/TableHeader';
 
 export interface DataTagsProps {
   date: string;
@@ -32,9 +33,30 @@ export interface UserAlertProps {
   children?: ReactElement | ReactElement[];
 }
 
+export interface TableInfoContextProps {
+  title: string;
+  dataBody: DataHistoryProps[];
+  result: number;
+}
+
+export interface TableInfoProps {
+  title: string;
+  dataBody: DataHistoryProps[];
+  result: number;
+  children?: ReactElement | ReactElement[];
+}
+
 export interface UserAlertHOCProps {
   ({ children, user }: UserAlertProps): JSX.Element;
   Image: () => JSX.Element;
   Info: () => JSX.Element;
   Date: () => JSX.Element;
+}
+
+export interface TableStructureHOCProps {
+  ({ children, title, dataBody, result }: TableInfoProps): JSX.Element;
+  Title: () => JSX.Element;
+  Header: ({ children }: TableHeaderProps) => JSX.Element;
+  Body: () => JSX.Element;
+  Result: () => JSX.Element;
 }
