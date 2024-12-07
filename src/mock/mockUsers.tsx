@@ -38,7 +38,12 @@ export const mockUsers: UserProps[] = [
     color: 'hsl(8, 70%, 50%)',
     img: null,
 
-    dates: [],
+    dates: [
+      {
+        date: '04/12',
+        over9: false,
+      },
+    ],
   },
   {
     user: 'Renzo',
@@ -64,6 +69,10 @@ export const mockUsers: UserProps[] = [
       {
         date: '03/12',
         over9: true,
+      },
+      {
+        date: '04/12',
+        over9: false,
       },
     ],
   },
@@ -149,6 +158,14 @@ export const mockUsers: UserProps[] = [
       },
     ],
   },
+  {
+    user: 'Axl',
+    amount: 0,
+    genre: 'male',
+    color: 'hsl(111, 70%, 50%)',
+    img: '../people/mono.gif',
+    dates: [],
+  },
 ];
 
 export const mockHistory: DataHistoryProps[] = [
@@ -175,6 +192,13 @@ export const mockHistory: DataHistoryProps[] = [
       { user: 'Ernesto', over9: true },
       { user: 'Paul', over9: true },
       { user: 'Brooke', over9: true },
+    ],
+  },
+  {
+    date: '04/12',
+    users: [
+      { user: 'Diego', over9: false },
+      { user: 'Ernesto', over9: false },
     ],
   },
 ];
