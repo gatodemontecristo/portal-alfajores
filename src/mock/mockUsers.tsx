@@ -33,7 +33,7 @@ export const mockUsers: UserProps[] = [
   },
   {
     user: 'Diego',
-    amount: 0,
+    amount: 5,
     genre: 'male',
     color: 'hsl(8, 70%, 50%)',
     img: null,

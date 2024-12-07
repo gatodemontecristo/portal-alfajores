@@ -14,6 +14,7 @@ import {
   mapUsersChoco,
   mapUsersDonnut,
 } from '../../utils';
+import Carousel from './Carousel';
 export const StatisticsPage = () => {
   const [isLate, setIsLate] = useState(true);
   const handleToggle = () => {
@@ -24,8 +25,9 @@ export const StatisticsPage = () => {
     setIsCandy(!isCandy);
   };
   return (
-    <div className="w-full flex flex-row pt-[40px] h-[80vh]">
-      <div className="w-1/3  relative ">
+    // <div className="w-full flex flex-row pt-[40px] h-[80vh]">
+    <Carousel>
+      <div className="w-full md:w-1/3 relative h-full">
         <div className=" flex flex-row justify-between w-full top-0 right-0 pt-[20px] z-50 px-5 h-[10%]  ">
           <p className="ms-5 font-extrabold text-[35px] text-[#ffb400] ">
             Gráficos
@@ -54,7 +56,8 @@ export const StatisticsPage = () => {
           )}
         </div>
       </div>
-      <div className="w-1/3 flex flex-col relative items-center justify-start gap-5">
+
+      <div className="w-full md:w-1/3 flex flex-col relative items-center justify-start gap-5">
         <div className="h-[10%] top-0  pt-[20px]">
           <ToogleButton
             handleToggle={handleToggle}
@@ -77,7 +80,7 @@ export const StatisticsPage = () => {
             ))}
         </div>
       </div>
-      <div className="w-1/3  p-3">
+      <div className="w-full md:w-1/3  p-3 h-full">
         <TableStructure
           title={'Historial'}
           dataBody={mockHistory}
@@ -99,6 +102,7 @@ export const StatisticsPage = () => {
           <TableStructure.Result />
         </TableStructure>
       </div>
-    </div>
+    </Carousel>
+    // </div>
   );
 };
