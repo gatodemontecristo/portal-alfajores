@@ -1,18 +1,24 @@
 // store/authStore.js
 import { create } from 'zustand';
 import {
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   User,
 } from 'firebase/auth';
-import { FirebaseAuth as auth } from '../firebase';
+import { FirebaseAuth as auth, db } from '../firebase';
 import { persist } from 'zustand/middleware';
+import { collection, getDocs } from 'firebase/firestore';
+import { AlfajorSpringProps } from '../interfaces';
 
+const googleProvider = new GoogleAuthProvider();
 export interface AuthStoreProps {
   user: User | null;
   status: 'idle' | 'loading' | 'authenticated' | 'unauthenticated' | 'error';
-  login: (email: string, password: string) => void;
+  loginWithEmailPassword: (email: string, password: string) => void;
+  singInWithGoogle: () => void;
   logout: () => void;
   checkAuth: () => void;
 }
@@ -21,7 +27,7 @@ const useAuthStore = create(
     (set) => ({
       user: null,
       status: 'idle',
-      login: async (email, password) => {
+      loginWithEmailPassword: async (email, password) => {
         set({ status: 'loading' });
         try {
           const userCredential = await signInWithEmailAndPassword(
@@ -29,6 +35,17 @@ const useAuthStore = create(
             email,
             password,
           );
+          set({ user: userCredential.user, status: 'authenticated' });
+        } catch (error) {
+          set({ status: 'error' });
+          console.error('Login error:', error);
+        }
+      },
+      singInWithGoogle: async () => {
+        set({ status: 'loading' });
+        try {
+          const userCredential = await signInWithPopup(auth, googleProvider);
+
           set({ user: userCredential.user, status: 'authenticated' });
         } catch (error) {
           set({ status: 'error' });
@@ -61,5 +78,44 @@ const useAuthStore = create(
     },
   ),
 );
+
+export interface FirestoreState {
+  documents: AlfajorSpringProps[];
+  loading: boolean;
+  error: string | null;
+  fetchDocuments: () => Promise<void>;
+}
+
+export const useFirestoreStore = create<FirestoreState>((set) => ({
+  documents: [],
+  loading: false,
+  error: null,
+  fetchDocuments: async () => {
+    set({ loading: true, error: null });
+    console.log('fetchDocuments');
+    try {
+      const querySnapshot = await getDocs(collection(db, 'alfajor-user'));
+      const docs = querySnapshot.docs.map((doc) => {
+        const data = doc.data();
+        return {
+          id: doc.id,
+          name: data.name,
+          open: data.open,
+          range: data.range,
+          users: data.users,
+        } as AlfajorSpringProps;
+      });
+      console.log(docs);
+      set({ documents: docs, loading: false });
+    } catch (err) {
+      console.log(err);
+      if (err instanceof Error) {
+        set({ error: err.message, loading: false });
+      } else {
+        set({ error: 'An unknown error occurred', loading: false });
+      }
+    }
+  },
+}));
 
 export default useAuthStore;

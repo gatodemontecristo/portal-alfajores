@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   ChocolateGraphic,
@@ -15,6 +15,7 @@ import {
   mapUsersDonnut,
 } from '../../utils';
 import Carousel from './Carousel';
+import { useFirestoreStore } from '../../store';
 export const StatisticsPage = () => {
   const [isLate, setIsLate] = useState(true);
   const handleToggle = () => {
@@ -24,6 +25,13 @@ export const StatisticsPage = () => {
   const handleToggleGraphic = () => {
     setIsCandy(!isCandy);
   };
+
+  const { fetchDocuments } = useFirestoreStore();
+
+  useEffect(() => {
+    fetchDocuments();
+  }, [fetchDocuments]);
+
   return (
     // <div className="w-full flex flex-row pt-[40px] h-[80vh]">
     <Carousel>

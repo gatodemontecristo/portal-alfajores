@@ -1,6 +1,7 @@
 // firebase/config.js
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 
 interface ImportMetaEnv {
   VITE_API_KEY: string;
@@ -30,3 +31,4 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const FirebaseAuth = getAuth(app);
+export const db = getFirestore(app);
