@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router-dom';
+// import { useAuthStore } from '../../store';
 export const NavBar = () => {
   const navigate = useNavigate();
-
-  const onNavigateLogin = () => {
-    navigate('/auth');
+  // const { logout } = useAuthStore();
+  const onNavigateLogin = async () => {
+    // await logout();
+    navigate('/auth/login');
   };
   return (
     <nav className=" w-auto bg-secondary text-white hidden flex-col justify-center md:flex relative">

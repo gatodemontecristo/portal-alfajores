@@ -7,7 +7,7 @@ export const TableResult = () => {
   return (
     <div className="flex flex-row justify-between items-center w-full mt-auto pt-2 border-t-2 border-black">
       <p className="font-bold text-[20px] ">Monto total : </p>
-      <span className="px-2 py-2 bg-amber-400 flex flex-row gap-4 w-1/3 justify-evenly  ">
+      <span className="px-2 py-2 bg-amber-400 flex flex-row gap-4 w-[40%] justify-evenly  ">
         {dataBody === null ? (
           <span className="loader absolute top-[-10px]"></span>
         ) : (

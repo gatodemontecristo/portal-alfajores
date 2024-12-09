@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-
+import { nanoid } from 'nanoid';
 interface CarouselProps {
   children: React.ReactNode;
 }
@@ -23,7 +23,6 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
   }, []);
 
   const scrollLeft = () => {
-    console.log('scrollLeft');
     if (carouselRef.current) {
       const newIndex = Math.max(currentIndex - 1, 0);
       setCurrentIndex(newIndex);
@@ -35,7 +34,6 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
   };
 
   const scrollRight = () => {
-    console.log('scrollRight');
     if (carouselRef.current) {
       const newIndex = Math.min(
         currentIndex + 1,
@@ -48,22 +46,21 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
       });
     }
   };
-
   return (
     <>
       {isMobile && (
         <>
           <button
             onClick={scrollLeft}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 p-2 bg-gray-300 rounded z-50"
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 p-3 bg-gray-300 bg-opacity-60 hover:bg-gray-400 rounded z-50"
           >
-            Left
+            <i className="bi bi-chevron-double-left"></i>
           </button>
           <button
             onClick={scrollRight}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 bg-gray-300 rounded  z-50"
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 p-3 bg-gray-300 bg-opacity-60 hover:bg-gray-400 rounded  z-50"
           >
-            Right
+            <i className="bi bi-chevron-double-right  "></i>
           </button>
         </>
       )}
@@ -75,6 +72,7 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
           isMobile ? (
             <div
               className={`w-full h-full relative flex-shrink-0 snap-center  transition-transform duration-500 ease-in-out transform ${isMobile && index === currentIndex ? 'scale-100' : 'scale-95'}`}
+              key={nanoid()}
             >
               {child}
             </div>

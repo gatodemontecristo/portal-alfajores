@@ -117,7 +117,10 @@ export const StatisticsPage = () => {
         <div className="flex flex-row items-center w-full justify-center  flex-wrap  gap-4 overflow-y-scroll custom-scrollbar">
           {alfajorCollection === null
             ? Array.from({ length: 6 }).map(() => (
-                <div className="flex flex-col items-center w-1/4 gap-2 mt-[15%]">
+                <div
+                  className="flex flex-col items-center w-1/4 gap-2 mt-[15%]"
+                  key={nanoid()}
+                >
                   <Skeleton type="circle" extraClass="w-[10vh] h-[10vh]" />
                   <Skeleton type="rect" extraClass="w-full h-[25px]" />
                 </div>

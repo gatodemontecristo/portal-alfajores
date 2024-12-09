@@ -106,7 +106,7 @@ export const useFirestoreStore = create<FirestoreState>((set) => ({
           users: data.users,
         } as AlfajorSpringProps;
       });
-      console.log(docs);
+
       set({ documents: docs, loading: false });
     } catch (err) {
       console.log(err);
