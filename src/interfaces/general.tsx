@@ -60,3 +60,22 @@ export interface TableStructureHOCProps {
   Body: () => JSX.Element;
   Result: () => JSX.Element;
 }
+
+export interface AlfajorSpringUserProps {
+  color: string;
+  genre: 'male' | 'female';
+  img: string;
+  name: string;
+  tardanzas: AlfajorSpringTardProps[];
+}
+export interface AlfajorSpringTardProps {
+  fecha: string;
+  over9: boolean;
+}
+export interface AlfajorSpringProps {
+  id: string;
+  name: string;
+  open: boolean;
+  range: string;
+  users: AlfajorSpringUserProps[];
+}
