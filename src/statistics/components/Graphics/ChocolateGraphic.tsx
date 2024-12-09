@@ -16,7 +16,6 @@ interface DataChocolateGraphic {
   data: DataBarProps[];
 }
 export const ChocolateGraphic = ({ data }: DataChocolateGraphic) => {
-  console.log('data', data);
   return (
     <ResponsiveBar
       data={data}

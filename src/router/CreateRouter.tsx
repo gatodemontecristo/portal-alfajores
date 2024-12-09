@@ -1,9 +1,9 @@
 import { useCheckAuth } from '../hooks';
 import { PublicRoute } from './PublicRoute';
-import { PrivateRoute } from './PrivateRoute';
+// import { PrivateRoute } from './PrivateRoute';
 import { CheckingAuth } from '../ui';
 import { AuthChildRoutes, AuthRoutes } from '../auth';
-import { PaymentChildRoutes, PaymentRoutes } from '../payments';
+// import { PaymentChildRoutes, PaymentRoutes } from '../payments';
 import { StatisticChildRoutes, StatisticRoutes } from '../statistics';
 // import useAuthStore from '../store/useAuthStore';
 // import { useEffect } from 'react';
@@ -38,15 +38,17 @@ export const CreateRouter = () => {
         ),
         children: StatisticChildRoutes,
       },
-      {
-        path: '/',
-        element: (
-          <PrivateRoute>
-            <PaymentRoutes />
-          </PrivateRoute>
-        ),
-        children: PaymentChildRoutes,
-      },
+      // {
+      //   path: '/statistics',
+      //   element: (
+      //     <PrivateRoute>
+      //       {/* <PaymentRoutes /> */}
+      //       <StatisticRoutes></StatisticRoutes>
+      //     </PrivateRoute>
+      //   ),
+      //   // children: PaymentChildRoutes,
+      //   children: StatisticChildRoutes,
+      // },
     ];
   }
 };

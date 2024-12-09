@@ -1,4 +1,4 @@
-import { DataHistoryProps, UserProps } from '../interfaces';
+import { AlfajorSpringProps, UserProps } from '../interfaces';
 
 export const mockUsers: UserProps[] = [
   {
@@ -168,37 +168,172 @@ export const mockUsers: UserProps[] = [
   },
 ];
 
-export const mockHistory: DataHistoryProps[] = [
-  {
-    date: '27/11',
-    users: [
-      { user: 'Ernesto', over9: false },
-      { user: 'Paul', over9: false },
-    ],
-  },
-  {
-    date: '02/12',
-    users: [
-      { user: 'Paul', over9: false },
-      { user: 'Brooke', over9: false },
-      { user: 'Noel', over9: true },
-      { user: 'Calif', over9: true },
-    ],
-  },
-  {
-    date: '03/12',
-    users: [
-      { user: 'Calif', over9: true },
-      { user: 'Ernesto', over9: true },
-      { user: 'Paul', over9: true },
-      { user: 'Brooke', over9: true },
-    ],
-  },
-  {
-    date: '04/12',
-    users: [
-      { user: 'Diego', over9: false },
-      { user: 'Ernesto', over9: false },
-    ],
-  },
-];
+export const mockHistory2: AlfajorSpringProps = {
+  id: 'JJ4874rwQa27IbVVR39s',
+  name: 'Spring Q4 SP5',
+  open: true,
+  range: '27 Nov - 10 Dec',
+  users: [
+    {
+      color: 'hsl(245, 70%, 50%)',
+      genre: 'male',
+      img: '',
+      name: 'Calif',
+      tardanzas: [
+        {
+          fecha: '02/12',
+          over9: true,
+        },
+        {
+          fecha: '03/12',
+          over9: true,
+        },
+      ],
+    },
+    {
+      color: 'hsl(204, 70%, 50%)',
+      genre: 'male',
+      img: '',
+      name: 'Paul',
+      tardanzas: [
+        {
+          fecha: '27/11',
+          over9: false,
+        },
+        {
+          fecha: '02/12',
+          over9: false,
+        },
+        {
+          fecha: '03/12',
+          over9: true,
+        },
+      ],
+    },
+    {
+      color: 'hsl(83, 70%, 50%)',
+      genre: 'male',
+      img: '',
+      name: 'Erick',
+      tardanzas: [],
+    },
+    {
+      color: 'hsl(8, 70%, 50%)',
+      genre: 'male',
+      img: '',
+      name: 'Diego',
+      tardanzas: [
+        {
+          fecha: '04/12',
+          over9: false,
+        },
+      ],
+    },
+    {
+      color: 'hsl(272, 70%, 50%)',
+      genre: 'male',
+      img: '',
+      name: 'Renzo',
+      tardanzas: [],
+    },
+    {
+      color: 'hsl(103, 70%, 50%)',
+      genre: 'male',
+      img: '../people/cubo.jpg',
+      name: 'Ernesto',
+      tardanzas: [
+        {
+          fecha: '27/11',
+          over9: false,
+        },
+        {
+          fecha: '03/12',
+          over9: true,
+        },
+        {
+          fecha: '04/12',
+          over9: false,
+        },
+      ],
+    },
+    {
+      color: 'hsl(178, 70%, 50%)',
+      genre: 'female',
+      img: '../people/gato_brujo.png',
+      name: 'Milagros',
+      tardanzas: [],
+    },
+    {
+      color: 'hsl(254, 70%, 50%)',
+      genre: 'female',
+      img: '',
+      name: 'Diana',
+      tardanzas: [],
+    },
+    {
+      color: 'hsl(345, 70%, 50%)',
+      genre: 'female',
+      img: '../people/airplane.png',
+      name: 'Melanye',
+      tardanzas: [],
+    },
+    {
+      color: 'hsl(169, 70%, 50%)',
+      genre: 'female',
+      img: '../people/picachu_fbi.jpeg',
+      name: 'Miluska',
+      tardanzas: [],
+    },
+    {
+      color: 'hsl(8, 70%, 50%)',
+      genre: 'male',
+      img: '',
+      name: 'Noel',
+      tardanzas: [
+        {
+          fecha: '02/12',
+          over9: true,
+        },
+      ],
+    },
+    {
+      color: 'hsl(72, 70%, 50%)',
+      genre: 'female',
+      img: '',
+      name: 'Brooke',
+      tardanzas: [
+        {
+          fecha: '02/12',
+          over9: false,
+        },
+        {
+          fecha: '03/12',
+          over9: true,
+        },
+      ],
+    },
+    {
+      color: 'hsl(72, 70%, 50%)',
+      genre: 'female',
+      img: '',
+      name: 'Brooke',
+      tardanzas: [
+        {
+          fecha: '02/12',
+          over9: false,
+        },
+        {
+          fecha: '03/12',
+          over9: true,
+        },
+      ],
+    },
+    {
+      color: 'hsl(111, 70%, 50%)',
+      genre: 'male',
+      img: '',
+      name: 'Axl',
+      tardanzas: [],
+    },
+  ],
+};

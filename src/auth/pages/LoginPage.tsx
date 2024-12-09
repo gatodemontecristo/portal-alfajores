@@ -1,10 +1,24 @@
 import { useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../../store';
 
 export const LoginPage = () => {
   const navigate = useNavigate();
 
   const onNavigateReport = () => {
     navigate('/statistics');
+  };
+  const { checkAuth, singInWithGoogle } = useAuthStore();
+  const startGoogleSignIn = async () => {
+    checkAuth();
+    const result = await singInWithGoogle();
+    console.log('result', result);
+    // if (!result.ok) {
+    //   notyf.error(result.errorMessage);
+    //   return dispatch(logout(result.errorMessage));
+    // } else {
+    //   notyf.success('Sesión iniciada!');
+    //   dispatch(login(result));
+    // }
   };
   return (
     <>
@@ -33,7 +47,10 @@ export const LoginPage = () => {
                 <button className="bg-pink-600 text-white p-2 rounded-md w-4/5 font-bold">
                   Login
                 </button>
-                <button className="bg-pink-600 text-white p-2 rounded-md w-1/5">
+                <button
+                  className="bg-pink-600 text-white p-2 rounded-md w-1/5"
+                  onClick={startGoogleSignIn}
+                >
                   <i className="bi bi-google"></i>
                 </button>
               </div>
