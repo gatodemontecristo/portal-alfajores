@@ -8,15 +8,15 @@ import {
   UserAlert,
 } from '../components';
 import { nanoid } from 'nanoid';
-import { mockHistory, mockHistory2, mockUsers } from '../../mock';
 import {
   calculateFinalAmount,
+  groupUsersByTardanzaFecha,
   mapUsersChoco,
   mapUsersDonnut,
 } from '../../utils';
 import Carousel from './Carousel';
 import { useFirestoreStore } from '../../store';
-import { AlfajorSpringProps } from '../../interfaces';
+import { AlfajorSpringProps, DataHistoryProps } from '../../interfaces';
 import { Skeleton } from '../../ui';
 export const StatisticsPage = () => {
   const [isLate, setIsLate] = useState(true);
@@ -28,9 +28,12 @@ export const StatisticsPage = () => {
     setIsCandy(!isCandy);
   };
 
-  const { fetchDocuments, documents, updateDocument } = useFirestoreStore();
+  const { fetchDocuments, documents } = useFirestoreStore();
   const [alfajorCollection, setAlfajorCollection] =
     useState<AlfajorSpringProps | null>(null);
+  const [historyCollection, setHistoryCollection] = useState<
+    DataHistoryProps[] | null
+  >(null);
   useEffect(() => {
     fetchDocuments();
   }, [fetchDocuments]);
@@ -39,27 +42,28 @@ export const StatisticsPage = () => {
     const collectionOpen = documents.find((doc) => doc.open);
     if (collectionOpen) {
       setAlfajorCollection(collectionOpen);
+      const history = groupUsersByTardanzaFecha(collectionOpen?.users || []);
+      setHistoryCollection(history);
     }
   }, [documents]);
 
-  const onUpdateDocument = () => {
-    updateDocument('JJ4874rwQa27IbVVR39s', mockHistory2);
-  };
+  // const onUpdateDocument = () => {
+  // updateDocument('JJ4874rwQa27IbVVR39s', mockHistory2);
+  //};
 
   return (
-    // <div className="w-full flex flex-row pt-[40px] h-[80vh]">
     <Carousel>
       <div className="w-full md:w-1/3 relative h-full">
         <div className=" flex flex-row justify-between w-full top-0 right-0 pt-[20px] z-50 px-5 h-[10%]  ">
           <p className="ms-5 font-extrabold text-[35px] text-[#ffb400] ">
             Gráficos
           </p>
-          <button
+          {/* <button
             className="bg-amber-500 text-white font-bold p-2 rounded-md"
             onClick={onUpdateDocument}
           >
             Actualizar
-          </button>
+          </button> */}
           <div>
             <ToogleButton
               handleToggle={handleToggleGraphic}
@@ -136,15 +140,14 @@ export const StatisticsPage = () => {
       <div className="w-full md:w-1/3  p-3 h-full">
         <TableStructure
           title={'Historial'}
-          dataBody={mockHistory}
-          result={calculateFinalAmount(mockUsers)}
+          dataBody={historyCollection}
+          result={calculateFinalAmount(alfajorCollection?.users || [])}
           key={nanoid()}
         >
           <TableStructure.Title />
           <TableStructure.Header
             children={
               <>
-                {' '}
                 <p className="font-bold text-[20px] w-1/5">Fecha</p>
                 <p className="font-bold text-[20px] w-3/5">Personas</p>
                 <p className="font-bold text-[20px] w-1/5">Monto</p>
@@ -156,6 +159,5 @@ export const StatisticsPage = () => {
         </TableStructure>
       </div>
     </Carousel>
-    // </div>
   );
 };

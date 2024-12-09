@@ -2,8 +2,8 @@ import {
   AlfajorSpringTardProps,
   AlfajorSpringUserProps,
   DataColumnProps,
+  DataHistoryProps,
   DataTagsProps,
-  UserProps,
 } from '../interfaces';
 
 export const calculateTotalAmount = (
@@ -23,9 +23,11 @@ const calculateTotalByHour = (
   }, 0);
 };
 
-export const calculateFinalAmount = (mockUsers: UserProps[]): number => {
-  return mockUsers.reduce((total, item) => {
-    return total + calculateTotalAmount(item.dates);
+export const calculateFinalAmount = (
+  alfajorCollection: AlfajorSpringUserProps[],
+): number => {
+  return alfajorCollection.reduce((total, item) => {
+    return total + calculateTotalAmount(item.tardanzas);
   }, 0);
 };
 export const mapUsersDonnut = (alfajorCollection: AlfajorSpringUserProps[]) => {
@@ -53,13 +55,37 @@ export const mapUsersChoco = (alfajorCollection: AlfajorSpringUserProps[]) => {
       };
     });
 };
+export const groupUsersByTardanzaFecha = (
+  users: AlfajorSpringUserProps[],
+): DataHistoryProps[] => {
+  const groupedData: {
+    [key: string]: { userName: string; over9: boolean }[];
+  } = {};
+
+  users.forEach((user) => {
+    user.tardanzas.forEach((tardanza) => {
+      if (!groupedData[tardanza.fecha]) {
+        groupedData[tardanza.fecha] = [];
+      }
+      groupedData[tardanza.fecha].push({
+        userName: user.name,
+        over9: tardanza.over9,
+      });
+    });
+  });
+
+  return Object.keys(groupedData).map((fecha) => ({
+    fecha,
+    users: groupedData[fecha],
+  }));
+};
 export const getUsersString = (users: DataColumnProps[]) => {
   return users
     .map((user) => {
       if (user.over9) {
-        return `<strong>${user.user}</strong>`;
+        return `<strong>${user.userName}</strong>`;
       }
-      return user.user;
+      return user.userName;
     })
     .join(', ');
 };

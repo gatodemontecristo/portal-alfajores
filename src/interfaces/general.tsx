@@ -7,12 +7,12 @@ export interface DataTagsProps {
 }
 
 export interface DataColumnProps {
-  user: string;
+  userName: string;
   over9: boolean;
 }
 
 export interface DataHistoryProps {
-  date: string;
+  fecha: string;
   users: DataColumnProps[];
 }
 export interface UserProps {
@@ -35,13 +35,13 @@ export interface UserAlertProps {
 
 export interface TableInfoContextProps {
   title: string;
-  dataBody: DataHistoryProps[];
+  dataBody: DataHistoryProps[] | null;
   result: number;
 }
 
 export interface TableInfoProps {
   title: string;
-  dataBody: DataHistoryProps[];
+  dataBody: DataHistoryProps[] | null;
   result: number;
   children?: ReactElement | ReactElement[];
 }

@@ -1,4 +1,4 @@
-import { AlfajorSpringProps, DataHistoryProps, UserProps } from '../interfaces';
+import { AlfajorSpringProps, UserProps } from '../interfaces';
 
 export const mockUsers: UserProps[] = [
   {
@@ -337,38 +337,3 @@ export const mockHistory2: AlfajorSpringProps = {
     },
   ],
 };
-
-export const mockHistory: DataHistoryProps[] = [
-  {
-    date: '27/11',
-    users: [
-      { user: 'Ernesto', over9: false },
-      { user: 'Paul', over9: false },
-    ],
-  },
-  {
-    date: '02/12',
-    users: [
-      { user: 'Paul', over9: false },
-      { user: 'Brooke', over9: false },
-      { user: 'Noel', over9: true },
-      { user: 'Calif', over9: true },
-    ],
-  },
-  {
-    date: '03/12',
-    users: [
-      { user: 'Calif', over9: true },
-      { user: 'Ernesto', over9: true },
-      { user: 'Paul', over9: true },
-      { user: 'Brooke', over9: true },
-    ],
-  },
-  {
-    date: '04/12',
-    users: [
-      { user: 'Diego', over9: false },
-      { user: 'Ernesto', over9: false },
-    ],
-  },
-];
