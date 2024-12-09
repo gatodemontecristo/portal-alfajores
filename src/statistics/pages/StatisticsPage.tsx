@@ -8,7 +8,7 @@ import {
   UserAlert,
 } from '../components';
 import { nanoid } from 'nanoid';
-import { mockHistory, mockUsers } from '../../mock';
+import { mockHistory, mockHistory2, mockUsers } from '../../mock';
 import {
   calculateFinalAmount,
   mapUsersChoco,
@@ -16,6 +16,8 @@ import {
 } from '../../utils';
 import Carousel from './Carousel';
 import { useFirestoreStore } from '../../store';
+import { AlfajorSpringProps } from '../../interfaces';
+import { Skeleton } from '../../ui';
 export const StatisticsPage = () => {
   const [isLate, setIsLate] = useState(true);
   const handleToggle = () => {
@@ -26,11 +28,23 @@ export const StatisticsPage = () => {
     setIsCandy(!isCandy);
   };
 
-  const { fetchDocuments } = useFirestoreStore();
-
+  const { fetchDocuments, documents, updateDocument } = useFirestoreStore();
+  const [alfajorCollection, setAlfajorCollection] =
+    useState<AlfajorSpringProps | null>(null);
   useEffect(() => {
     fetchDocuments();
   }, [fetchDocuments]);
+
+  useEffect(() => {
+    const collectionOpen = documents.find((doc) => doc.open);
+    if (collectionOpen) {
+      setAlfajorCollection(collectionOpen);
+    }
+  }, [documents]);
+
+  const onUpdateDocument = () => {
+    updateDocument('JJ4874rwQa27IbVVR39s', mockHistory2);
+  };
 
   return (
     // <div className="w-full flex flex-row pt-[40px] h-[80vh]">
@@ -40,6 +54,12 @@ export const StatisticsPage = () => {
           <p className="ms-5 font-extrabold text-[35px] text-[#ffb400] ">
             Gráficos
           </p>
+          <button
+            className="bg-amber-500 text-white font-bold p-2 rounded-md"
+            onClick={onUpdateDocument}
+          >
+            Actualizar
+          </button>
           <div>
             <ToogleButton
               handleToggle={handleToggleGraphic}
@@ -56,10 +76,26 @@ export const StatisticsPage = () => {
         </div>
         <div className="flex flex-col h-[90%] ">
           {isCandy ? (
-            <DonnutGraphic data={mapUsersDonnut(mockUsers)} />
+            alfajorCollection === null ? (
+              <div className="flex flex-col items-center w-full gap-5 mt-[25%]">
+                <Skeleton type="circle" extraClass="w-[35vh] h-[35vh]" />
+                <Skeleton type="rect" extraClass="w-[60%] h-[30px]" />
+              </div>
+            ) : (
+              <DonnutGraphic
+                data={mapUsersDonnut(alfajorCollection?.users || [])}
+              />
+            )
+          ) : alfajorCollection === null ? (
+            <div className="flex flex-row items-end justify-center w-full gap-5 mt-[20%]">
+              <Skeleton type="rect" extraClass="w-[40px] h-[40vh]" />
+              <Skeleton type="rect" extraClass="w-[40px] h-[30vh]" />
+              <Skeleton type="rect" extraClass="w-[40px] h-[50vh]" />
+              <Skeleton type="rect" extraClass="w-[40px] h-[25vh]" />
+            </div>
           ) : (
             <ChocolateGraphic
-              data={mapUsersChoco(mockUsers)}
+              data={mapUsersChoco(alfajorCollection?.users || [])}
             ></ChocolateGraphic>
           )}
         </div>
@@ -74,18 +110,27 @@ export const StatisticsPage = () => {
             children2={<span>Puntuales</span>}
           />
         </div>
-        <div className="flex flex-row items-center  justify-center  flex-wrap  gap-4 overflow-y-scroll custom-scrollbar">
-          {mockUsers
-            .filter((user) =>
-              isLate ? user.dates.length > 0 : user.dates.length == 0,
-            )
-            .map((user) => (
-              <UserAlert {...{ user }} key={nanoid()}>
-                <UserAlert.Image />
-                <UserAlert.Info />
-                <UserAlert.Date />
-              </UserAlert>
-            ))}
+        <div className="flex flex-row items-center w-full justify-center  flex-wrap  gap-4 overflow-y-scroll custom-scrollbar">
+          {alfajorCollection === null
+            ? Array.from({ length: 6 }).map(() => (
+                <div className="flex flex-col items-center w-1/4 gap-2 mt-[15%]">
+                  <Skeleton type="circle" extraClass="w-[10vh] h-[10vh]" />
+                  <Skeleton type="rect" extraClass="w-full h-[25px]" />
+                </div>
+              ))
+            : alfajorCollection?.users
+                .filter((user) =>
+                  isLate
+                    ? user.tardanzas.length > 0
+                    : user.tardanzas.length == 0,
+                )
+                .map((user) => (
+                  <UserAlert {...{ user }} key={nanoid()}>
+                    <UserAlert.Image />
+                    <UserAlert.Info />
+                    <UserAlert.Date />
+                  </UserAlert>
+                ))}
         </div>
       </div>
       <div className="w-full md:w-1/3  p-3 h-full">

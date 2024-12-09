@@ -38,15 +38,17 @@ export const CreateRouter = () => {
         ),
         children: StatisticChildRoutes,
       },
-      {
-        path: '/',
-        element: (
-          <PrivateRoute>
-            <PaymentRoutes />
-          </PrivateRoute>
-        ),
-        children: PaymentChildRoutes,
-      },
+      // {
+      //   path: '/statistics',
+      //   element: (
+      //     <PrivateRoute>
+      //       {/* <PaymentRoutes /> */}
+      //       <StatisticRoutes></StatisticRoutes>
+      //     </PrivateRoute>
+      //   ),
+      //   // children: PaymentChildRoutes,
+      //   children: StatisticChildRoutes,
+      // },
     ];
   }
 };

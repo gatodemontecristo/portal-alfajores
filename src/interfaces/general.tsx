@@ -25,11 +25,11 @@ export interface UserProps {
 }
 
 export interface UserContextProps {
-  user: UserProps;
+  user: AlfajorSpringUserProps;
 }
 
 export interface UserAlertProps {
-  user: UserProps;
+  user: AlfajorSpringUserProps;
   children?: ReactElement | ReactElement[];
 }
 

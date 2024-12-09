@@ -1,7 +1,13 @@
-import { DataColumnProps, DataTagsProps, UserProps } from '../interfaces';
+import {
+  AlfajorSpringTardProps,
+  AlfajorSpringUserProps,
+  DataColumnProps,
+  DataTagsProps,
+  UserProps,
+} from '../interfaces';
 
 export const calculateTotalAmount = (
-  data: DataTagsProps[] | DataColumnProps[],
+  data: DataTagsProps[] | DataColumnProps[] | AlfajorSpringTardProps[],
 ): number => {
   return data.reduce((total, item) => {
     return total + (item.over9 ? 10 : 5);
@@ -9,7 +15,7 @@ export const calculateTotalAmount = (
 };
 
 const calculateTotalByHour = (
-  data: DataTagsProps[] | DataColumnProps[],
+  data: DataTagsProps[] | DataColumnProps[] | AlfajorSpringTardProps[],
   over: boolean,
 ): number => {
   return data.reduce((total, item) => {
@@ -22,27 +28,27 @@ export const calculateFinalAmount = (mockUsers: UserProps[]): number => {
     return total + calculateTotalAmount(item.dates);
   }, 0);
 };
-export const mapUsersDonnut = (mockUsers: UserProps[]) => {
-  return mockUsers
-    .filter((user) => user.dates.length > 0)
+export const mapUsersDonnut = (alfajorCollection: AlfajorSpringUserProps[]) => {
+  return alfajorCollection
+    .filter((user) => user.tardanzas.length > 0)
     .map((user) => {
       return {
-        id: user.user,
-        label: user.user,
-        value: calculateTotalAmount(user.dates),
+        id: user.name,
+        label: user.name,
+        value: calculateTotalAmount(user.tardanzas),
         color: user.color,
       };
     });
 };
-export const mapUsersChoco = (mockUsers: UserProps[]) => {
-  return mockUsers
-    .filter((user) => user.dates.length > 0)
+export const mapUsersChoco = (alfajorCollection: AlfajorSpringUserProps[]) => {
+  return alfajorCollection
+    .filter((user) => user.tardanzas.length > 0)
     .map((user) => {
       return {
-        deudores: user.user,
-        over8: calculateTotalByHour(user.dates, false).toString(),
+        deudores: user.name,
+        over8: calculateTotalByHour(user.tardanzas, false).toString(),
         over8Color: 'hsl(112, 70%, 50%)',
-        over9: calculateTotalByHour(user.dates, true).toString(),
+        over9: calculateTotalByHour(user.tardanzas, true).toString(),
         over9Color: 'hsl(8, 70%, 50%)',
       };
     });

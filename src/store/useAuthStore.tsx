@@ -10,7 +10,7 @@ import {
 } from 'firebase/auth';
 import { FirebaseAuth as auth, db } from '../firebase';
 import { persist } from 'zustand/middleware';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { AlfajorSpringProps } from '../interfaces';
 
 const googleProvider = new GoogleAuthProvider();
@@ -22,7 +22,7 @@ export interface AuthStoreProps {
   logout: () => void;
   checkAuth: () => void;
 }
-const useAuthStore = create(
+export const useAuthStore = create(
   persist<AuthStoreProps>(
     (set) => ({
       user: null,
@@ -84,6 +84,7 @@ export interface FirestoreState {
   loading: boolean;
   error: string | null;
   fetchDocuments: () => Promise<void>;
+  updateDocument: (id: string, data: AlfajorSpringProps) => Promise<void>;
 }
 
 export const useFirestoreStore = create<FirestoreState>((set) => ({
@@ -107,6 +108,22 @@ export const useFirestoreStore = create<FirestoreState>((set) => ({
       });
       console.log(docs);
       set({ documents: docs, loading: false });
+    } catch (err) {
+      console.log(err);
+      if (err instanceof Error) {
+        set({ error: err.message, loading: false });
+      } else {
+        set({ error: 'An unknown error occurred', loading: false });
+      }
+    }
+  },
+  updateDocument: async (id, data) => {
+    set({ loading: true, error: null });
+    try {
+      const docRef = doc(db, 'alfajor-user', id);
+      const updateData = { ...data };
+      await updateDoc(docRef, updateData);
+      set({ loading: false });
     } catch (err) {
       console.log(err);
       if (err instanceof Error) {

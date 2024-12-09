@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { UserContext } from './UserAlert';
+import { calculateTotalAmount } from '../../../../utils';
 
 const UserInfoTitle = ({ title }: { title: string }) => {
   return (
@@ -18,8 +19,10 @@ export const UserInfo = () => {
   const { user } = useContext(UserContext);
   return (
     <div className="flex flex-col">
-      <UserInfoTitle title={user.user}></UserInfoTitle>
-      <UserInfoSubTitle money={user.amount}></UserInfoSubTitle>
+      <UserInfoTitle title={user.name}></UserInfoTitle>
+      <UserInfoSubTitle
+        money={calculateTotalAmount(user.tardanzas)}
+      ></UserInfoSubTitle>
     </div>
   );
 };
