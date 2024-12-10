@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { nanoid } from 'nanoid';
 interface CarouselProps {
   children: React.ReactNode;
 }
@@ -72,7 +71,6 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
           isMobile ? (
             <div
               className={`w-full h-full relative flex-shrink-0 snap-center  transition-transform duration-500 ease-in-out transform ${isMobile && index === currentIndex ? 'scale-100' : 'scale-95'}`}
-              key={nanoid()}
             >
               {child}
             </div>
