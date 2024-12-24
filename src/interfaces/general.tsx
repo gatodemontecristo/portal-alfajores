@@ -30,6 +30,7 @@ export interface UserContextProps {
 
 export interface UserAlertProps {
   user: AlfajorSpringUserProps;
+  handleOpenModal: (user: AlfajorSpringUserProps) => void;
   children?: ReactElement | ReactElement[];
 }
 

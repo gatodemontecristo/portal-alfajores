@@ -11,7 +11,11 @@ import {
 import { FirebaseAuth as auth, db } from '../firebase';
 import { persist } from 'zustand/middleware';
 import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
-import { AlfajorSpringProps } from '../interfaces';
+import {
+  AlfajorSpringProps,
+  AlfajorSpringTardProps,
+  AlfajorSpringUserProps,
+} from '../interfaces';
 
 const googleProvider = new GoogleAuthProvider();
 export interface AuthStoreProps {
@@ -84,55 +88,103 @@ export interface FirestoreState {
   loading: boolean;
   error: string | null;
   fetchDocuments: () => Promise<void>;
-  updateDocument: (id: string, data: AlfajorSpringProps) => Promise<void>;
+  updateDocument: (
+    id: string,
+    // data: AlfajorSpringProps | { users: AlfajorSpringUserProps[] },
+    data: { users: AlfajorSpringUserProps[] },
+  ) => Promise<void>;
 }
 
-export const useFirestoreStore = create<FirestoreState>((set) => ({
-  documents: [],
-  loading: false,
-  error: null,
-  fetchDocuments: async () => {
-    set({ loading: true, error: null });
-    console.log('fetchDocuments');
-    try {
-      const querySnapshot = await getDocs(collection(db, 'alfajor-user'));
-      const docs = querySnapshot.docs.map((doc) => {
-        const data = doc.data();
-        return {
-          id: doc.id,
-          name: data.name,
-          open: data.open,
-          range: data.range,
-          users: data.users,
-        } as AlfajorSpringProps;
-      });
+export const useFirestoreStore = create(
+  persist<FirestoreState>(
+    (set) => ({
+      documents: [],
+      loading: false,
+      error: null,
+      fetchDocuments: async () => {
+        set({ loading: true, error: null });
+        console.log('fetchDocuments');
+        try {
+          const querySnapshot = await getDocs(collection(db, 'alfajor-user'));
+          const docs = querySnapshot.docs.map((doc) => {
+            const data = doc.data();
+            console.log(data);
+            return {
+              id: doc.id,
+              name: data.name,
+              open: data.open,
+              range: data.range,
+              users: data.users,
+            } as AlfajorSpringProps;
+          });
 
-      set({ documents: docs, loading: false });
-    } catch (err) {
-      console.log(err);
-      if (err instanceof Error) {
-        set({ error: err.message, loading: false });
-      } else {
-        set({ error: 'An unknown error occurred', loading: false });
+          set({ documents: docs, loading: false });
+        } catch (err) {
+          console.log(err);
+          if (err instanceof Error) {
+            set({ error: err.message, loading: false });
+          } else {
+            set({ error: 'An unknown error occurred', loading: false });
+          }
+        }
+      },
+      updateDocument: async (id, data) => {
+        set({ loading: true, error: null });
+        try {
+          const docRef = doc(db, 'alfajor-user', id);
+          // const updateData = { ...data };
+          await updateDoc(docRef, data);
+          set({ loading: false });
+        } catch (err) {
+          console.log(err);
+          if (err instanceof Error) {
+            set({ error: err.message, loading: false });
+          } else {
+            set({ error: 'An unknown error occurred', loading: false });
+          }
+        }
+      },
+    }),
+    {
+      name: 'alfajores-collection',
+    },
+  ),
+);
+export interface useAlfajorStoreProps {
+  alfajor: AlfajorSpringUserProps | null;
+  setAlfajor: (alfajor: AlfajorSpringUserProps) => void;
+  setAddTardanza: (tardanza: AlfajorSpringTardProps) => void;
+  setDeleteTardanza: (fecha: string) => void;
+}
+export const useAlfajorStore = create<useAlfajorStoreProps>((set) => ({
+  alfajor: null,
+  setAlfajor: (alfajor) => set({ alfajor }),
+  setAddTardanza: (tardanza) =>
+    set((state) => {
+      if (state.alfajor) {
+        return {
+          alfajor: {
+            ...state.alfajor,
+            tardanzas: [...state.alfajor.tardanzas, tardanza],
+          },
+        };
       }
-    }
-  },
-  updateDocument: async (id, data) => {
-    set({ loading: true, error: null });
-    try {
-      const docRef = doc(db, 'alfajor-user', id);
-      const updateData = { ...data };
-      await updateDoc(docRef, updateData);
-      set({ loading: false });
-    } catch (err) {
-      console.log(err);
-      if (err instanceof Error) {
-        set({ error: err.message, loading: false });
-      } else {
-        set({ error: 'An unknown error occurred', loading: false });
+      return state;
+    }),
+  setDeleteTardanza: (fecha) =>
+    set((state) => {
+      if (state.alfajor) {
+        return {
+          alfajor: {
+            ...state.alfajor,
+            tardanzas: state.alfajor.tardanzas.filter(
+              (tardanza) => tardanza.fecha !== fecha,
+            ),
+          },
+        };
       }
-    }
-  },
+      return state;
+    }),
 }));
 
 export default useAuthStore;
