@@ -5,14 +5,23 @@ import { UserContextProps, UserAlertProps } from '../../../../interfaces';
 export const UserContext = createContext({} as UserContextProps);
 const { Provider } = UserContext;
 
-export const UserAlert = ({ user, children }: UserAlertProps) => {
+export const UserAlert = ({
+  user,
+  handleOpenModal,
+  children,
+}: UserAlertProps) => {
   return (
     <Provider
       value={{
         user,
       }}
     >
-      <div className="flex flex-col items-center w-1/4">{children}</div>
+      <div
+        className="flex flex-col items-center w-1/4"
+        onClick={() => handleOpenModal(user)}
+      >
+        {children}
+      </div>
     </Provider>
   );
 };
