@@ -82,7 +82,7 @@ export const UserModals = ({ isOpen, onClose }: ModalProps) => {
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <form
         onSubmit={handleSubmit(handleUpdateUserTardanza)}
-        className=" w-1/3"
+        className="md:w-1/3 w-5/6"
       >
         <div className="bg-white rounded-lg shadow-lg p-6">
           <div className="flex justify-between items-center mb-4">
