@@ -15,13 +15,15 @@ export interface IFormEditAssistance {
   over9: boolean;
 }
 
-const UserModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
+export const UserModals = ({ isOpen, onClose }: ModalProps) => {
   const notyf = new Notyf();
-  if (!isOpen) return null;
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { documents, updateDocument } = useFirestoreStore();
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { documents, loading, updateDocument } = useFirestoreStore();
   const { setDeleteTardanza, setAddTardanza } = useAlfajorStore();
+  const { alfajor } = useAlfajorStore();
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const { register, handleSubmit, getValues } = useForm<IFormEditAssistance>();
+
+  if (!isOpen) return null;
 
   const updateUserField = async (
     documentId: string,
@@ -37,14 +39,12 @@ const UserModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
         ...updatedUsers[userIndex],
         [field]: value,
       };
-      console.log('updateUserField');
-      console.log(documentId, updatedUsers);
+
       await updateDocument(documentId, { users: updatedUsers });
+      notyf.success('Se actualizó correctamente');
     }
   };
   const handleUpdateUser = () => {
-    // updateUserField('JJ4874rwQa27IbVVR39s', 0, 'name', 'Calif');
-    console.log('handleUpdateUser', alfajor);
     if (alfajor?.tardanzas !== undefined) {
       updateUserField(
         'JJ4874rwQa27IbVVR39s',
@@ -73,12 +73,7 @@ const UserModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   const deleteAssistance = (date: string) => {
     setDeleteTardanza(date);
   };
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { alfajor } = useAlfajorStore();
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [isChecked, setIsChecked] = useState<boolean>(false);
 
-  const { register, handleSubmit, getValues } = useForm<IFormEditAssistance>();
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(e.target.checked);
   };
@@ -92,7 +87,7 @@ const UserModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
         <div className="bg-white rounded-lg shadow-lg p-6">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-bold">Editar usuario</h2>
-            <button onClick={onClose}>
+            <button onClick={onClose} disabled={loading}>
               <i className="bi bi-x-circle"></i>
             </button>
           </div>
@@ -127,7 +122,14 @@ const UserModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
               Agregar
             </button>
           </div>
-          <ul className="space-y-2  mb-4">
+          <ul className="space-y-2  my-5">
+            {alfajor?.tardanzas.length === 0 && (
+              <li className="flex justify-center p-2 border-b border-gray-200 text-center">
+                <p className="text-xl text-gray-500 italic font-light">
+                  No hay tardanzas
+                </p>
+              </li>
+            )}
             {alfajor?.tardanzas.map((item, index) => (
               <li
                 key={index}
@@ -143,19 +145,23 @@ const UserModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
             ))}
           </ul>
           <div className="flex justify-end  mb-4">
-            <button
-              onClick={handleUpdateUser}
-              type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded-md flex gap-2"
-            >
-              <i className="bi bi-floppy-fill"></i>
-              Aceptar
-            </button>
+            {loading ? (
+              <div className="flex mx-5">
+                <span className="loader2"></span>
+              </div>
+            ) : (
+              <button
+                onClick={handleUpdateUser}
+                type="submit"
+                className="bg-blue-500 text-white px-4 py-2 rounded-md flex gap-2"
+              >
+                <i className="bi bi-floppy-fill"></i>
+                Aceptar
+              </button>
+            )}
           </div>
         </div>
       </form>
     </div>
   );
 };
-
-export default UserModal;

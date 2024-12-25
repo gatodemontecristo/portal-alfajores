@@ -6,6 +6,7 @@ import {
   TableStructure,
   ToogleButton,
   UserAlert,
+  UserModals,
 } from '../components';
 import { nanoid } from 'nanoid';
 import {
@@ -22,7 +23,6 @@ import {
   DataHistoryProps,
 } from '../../interfaces';
 import { Skeleton } from '../../ui';
-import UserModal from '../components/User/UserModal/UserModal';
 export const StatisticsPage = () => {
   const [isLate, setIsLate] = useState(true);
   const handleToggle = () => {
@@ -53,10 +53,6 @@ export const StatisticsPage = () => {
     }
   }, [documents]);
 
-  // const onUpdateDocument = () => {
-  // updateDocument('JJ4874rwQa27IbVVR39s', mockHistory2);
-  //};
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
 
@@ -74,9 +70,6 @@ export const StatisticsPage = () => {
       <Carousel>
         <div className="w-full md:w-1/3 relative h-full">
           <div className=" flex flex-row justify-between w-full top-0 right-0 pt-[20px] z-50 px-5 h-[10%]  ">
-            <button className="bg-blue-500 text-white p-2 rounded-md">
-              Open Modal
-            </button>
             <p className="ms-5 font-extrabold text-[35px] text-[#ffb400] ">
               Gráficos
             </p>
@@ -132,13 +125,23 @@ export const StatisticsPage = () => {
         </div>
 
         <div className="w-full md:w-1/3 flex flex-col relative items-center justify-start gap-5">
-          <div className="h-[10%] top-0  pt-[20px]">
+          <div className="flex flex-row items-center justify-evenly h-[10%] top-0  pt-[20px] w-full">
             <ToogleButton
               handleToggle={handleToggle}
               isAction={isLate}
               children1={<span>Tardones</span>}
               children2={<span>Puntuales</span>}
             />
+            <div className="flex flex-col gap-1">
+              <div className="flex flex-rown gap-2 items-center">
+                <div className="w-[20px] h-[20px] bg-slate-400"></div>
+                <p className="text-xs">Tardanza</p>
+              </div>
+              <div className="flex flex-row gap-2 items-center">
+                <div className="w-[20px] h-[20px] bg-yellow-500"></div>
+                <p className="text-xs">Supertardanza</p>
+              </div>
+            </div>
           </div>
           <div className="flex flex-row items-center w-full justify-center  flex-wrap  gap-4 overflow-y-scroll custom-scrollbar">
             {alfajorCollection === null
@@ -188,7 +191,7 @@ export const StatisticsPage = () => {
           </TableStructure>
         </div>
       </Carousel>
-      <UserModal
+      <UserModals
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         items={items}

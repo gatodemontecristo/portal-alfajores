@@ -62,3 +62,34 @@
     box-shadow: 0 2.5em 0 0;
   }
 }
+
+.loader2,
+.loader2:before,
+.loader2:after {
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  animation-fill-mode: both;
+  animation: bblFadInOut 1.8s infinite ease-in-out;
+}
+.loader2 {
+  color: #3b81f6;
+  font-size: 7px;
+  position: relative;
+  text-indent: -9999em;
+  transform: translateZ(0);
+  animation-delay: -0.16s;
+}
+.loader2:before,
+.loader2:after {
+  content: '';
+  position: absolute;
+  top: 0;
+}
+.loader2:before {
+  left: -2.5em;
+  animation-delay: -0.32s;
+}
+.loader2:after {
+  left: 2.5em;
+}
