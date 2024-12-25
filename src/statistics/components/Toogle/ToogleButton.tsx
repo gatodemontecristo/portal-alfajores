@@ -15,7 +15,7 @@ export const ToogleButton = ({
   color = 'bg-orange-500',
 }: ToogleButtonProps) => {
   return (
-    <>
+    <div>
       <button
         onClick={handleToggle}
         className={`px-4 py-2 font-bold rounded-l-md ${
@@ -32,6 +32,6 @@ export const ToogleButton = ({
       >
         {children2}
       </button>
-    </>
+    </div>
   );
 };

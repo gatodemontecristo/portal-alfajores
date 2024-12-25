@@ -97,7 +97,7 @@ export interface FirestoreState {
 
 export const useFirestoreStore = create(
   persist<FirestoreState>(
-    (set) => ({
+    (set, get) => ({
       documents: [],
       loading: false,
       error: null,
@@ -149,7 +149,7 @@ export const useFirestoreStore = create(
           const docRef = doc(db, 'alfajor-user', id);
           // const updateData = { ...data };
           await updateDoc(docRef, data);
-          set({ loading: false });
+          await get().fetchDocuments();
         } catch (err) {
           console.log(err);
           if (err instanceof Error) {
