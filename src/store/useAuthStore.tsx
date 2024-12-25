@@ -114,7 +114,22 @@ export const useFirestoreStore = create(
               name: data.name,
               open: data.open,
               range: data.range,
-              users: data.users,
+              users: data.users.map(
+                (user: AlfajorSpringUserProps, index: number) => {
+                  return {
+                    ...user,
+                    index: index,
+                    // tardanzas: user.tardanzas.map(
+                    //   (tardanza: AlfajorSpringTardProps) => {
+                    //     return {
+                    //       ...tardanza,
+                    //       fecha: new Date(tardanza.fecha).toLocaleDateString(),
+                    //     };
+                    //   },
+                    // ),
+                  };
+                },
+              ),
             } as AlfajorSpringProps;
           });
 
@@ -186,5 +201,3 @@ export const useAlfajorStore = create<useAlfajorStoreProps>((set) => ({
       return state;
     }),
 }));
-
-export default useAuthStore;

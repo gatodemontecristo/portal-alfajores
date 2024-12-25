@@ -64,6 +64,7 @@ export interface TableStructureHOCProps {
 
 export interface AlfajorSpringUserProps {
   color: string;
+  index: number;
   genre: 'male' | 'female';
   img: string;
   name: string;

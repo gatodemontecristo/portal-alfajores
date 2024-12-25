@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
-
-import useAuthStore from '../store/useAuthStore';
+import { useAuthStore } from '../store';
 
 export const useCheckAuth = () => {
   const { status, checkAuth } = useAuthStore();

@@ -14,6 +14,11 @@ export const calculateTotalAmount = (
   }, 0);
 };
 
+export const formatDateToMMDD = (dateString: string): string => {
+  const arrayValue = dateString.split('-');
+  return `${arrayValue[2]}/${arrayValue[1]}`;
+};
+
 const calculateTotalByHour = (
   data: DataTagsProps[] | DataColumnProps[] | AlfajorSpringTardProps[],
   over: boolean,
