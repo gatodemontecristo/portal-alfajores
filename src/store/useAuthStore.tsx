@@ -186,5 +186,3 @@ export const useAlfajorStore = create<useAlfajorStoreProps>((set) => ({
       return state;
     }),
 }));
-
-export default useAuthStore;
