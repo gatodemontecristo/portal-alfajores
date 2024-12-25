@@ -3,6 +3,7 @@ import { useAlfajorStore, useFirestoreStore } from '../../../../store';
 import { useForm } from 'react-hook-form';
 import { formatDateToMMDD } from '../../../../utils';
 import { Notyf } from 'notyf';
+import { AlfajorSpringTardProps } from '../../../../interfaces';
 
 interface ModalProps {
   isOpen: boolean;
@@ -26,7 +27,7 @@ const UserModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     documentId: string,
     userIndex: number,
     field: string,
-    value: string,
+    value: AlfajorSpringTardProps[],
   ) => {
     const document = documents.find((doc) => doc.id === documentId);
 
@@ -42,7 +43,16 @@ const UserModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     }
   };
   const handleUpdateUser = () => {
-    updateUserField('JJ4874rwQa27IbVVR39s', 0, 'name', 'Calif');
+    // updateUserField('JJ4874rwQa27IbVVR39s', 0, 'name', 'Calif');
+    console.log('handleUpdateUser', alfajor);
+    if (alfajor?.tardanzas !== undefined) {
+      updateUserField(
+        'JJ4874rwQa27IbVVR39s',
+        alfajor.index,
+        'tardanzas',
+        alfajor.tardanzas,
+      );
+    }
   };
 
   const handleUpdateUserTardanza = () => {
@@ -134,7 +144,7 @@ const UserModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
           </ul>
           <div className="flex justify-end  mb-4">
             <button
-              onClick={onClose}
+              onClick={handleUpdateUser}
               type="submit"
               className="bg-blue-500 text-white px-4 py-2 rounded-md flex gap-2"
             >
