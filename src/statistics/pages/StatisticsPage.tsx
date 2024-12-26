@@ -23,8 +23,10 @@ import {
   DataHistoryProps,
 } from '../../interfaces';
 import { Skeleton } from '../../ui';
+import { Notyf } from 'notyf';
 export const StatisticsPage = () => {
   const [isLate, setIsLate] = useState(true);
+  const notyf = new Notyf();
   const handleToggle = () => {
     setIsLate(!isLate);
   };
@@ -33,7 +35,8 @@ export const StatisticsPage = () => {
     setIsCandy(!isCandy);
   };
 
-  const { fetchDocuments, documents } = useFirestoreStore();
+  const { fetchDocuments, documents, error, success, loading } =
+    useFirestoreStore();
   const { setAlfajor } = useAlfajorStore();
   const [alfajorCollection, setAlfajorCollection] =
     useState<AlfajorSpringProps | null>(null);
@@ -64,6 +67,17 @@ export const StatisticsPage = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+
+  useEffect(() => {
+    if (!loading) {
+      if (error === null && success !== null) {
+        notyf.success(success);
+      } else if (error !== null) {
+        notyf.error(error);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading]);
 
   return (
     <>

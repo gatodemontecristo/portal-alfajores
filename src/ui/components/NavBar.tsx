@@ -1,10 +1,16 @@
 import { useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../../store';
+import { Notyf } from 'notyf';
 // import { useAuthStore } from '../../store';
 export const NavBar = () => {
   const navigate = useNavigate();
-  // const { logout } = useAuthStore();
+  const { logout, status } = useAuthStore();
+  const notyf = new Notyf();
   const onNavigateLogin = async () => {
-    // await logout();
+    if (status === 'authenticated') {
+      await logout();
+      notyf.error('Se deslogueo correctamente');
+    }
     navigate('/auth/login');
   };
   return (
@@ -15,7 +21,7 @@ export const NavBar = () => {
             <img className="h-10 w-10 " src="../icons/alfajor.png" alt="" />
           </div>
           <p className="text-center text-black  text-[13px]	mt-1 font-semibold">
-            Spring Actual
+            Sprint Actual
           </p>
         </button>
         {/* <button className="p-3  w-[120px] flex flex-col items-center group">
