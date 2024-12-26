@@ -3,6 +3,6 @@ import { StatisticsPage } from '../pages';
 
 export const StatisticChildRoutes = [
   { path: 'page', element: <StatisticsPage></StatisticsPage> },
-  { path: '/statistics/*', element: <Navigate to="/statistics/page" /> },
-  { path: '/statistics/', element: <Navigate to="/statistics/page" /> },
+  { path: '/*', element: <Navigate to="/page" /> },
+  { path: '/', element: <Navigate to="/page" /> },
 ];

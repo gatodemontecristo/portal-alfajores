@@ -22,10 +22,11 @@ export interface AuthStoreProps {
   user: User | null;
   status: 'idle' | 'loading' | 'authenticated' | 'unauthenticated' | 'error';
   loginWithEmailPassword: (email: string, password: string) => void;
-  singInWithGoogle: () => void;
+  singInWithGoogle: () => Promise<'ok' | 'error'>;
   logout: () => void;
   checkAuth: () => void;
 }
+
 export const useAuthStore = create(
   persist<AuthStoreProps>(
     (set) => ({
@@ -45,15 +46,17 @@ export const useAuthStore = create(
           console.error('Login error:', error);
         }
       },
-      singInWithGoogle: async () => {
+      singInWithGoogle: async (): Promise<'ok' | 'error'> => {
         set({ status: 'loading' });
         try {
           const userCredential = await signInWithPopup(auth, googleProvider);
 
           set({ user: userCredential.user, status: 'authenticated' });
+          return 'ok';
         } catch (error) {
           set({ status: 'error' });
           console.error('Login error:', error);
+          return 'error';
         }
       },
       logout: async () => {
@@ -67,7 +70,7 @@ export const useAuthStore = create(
         }
       },
       checkAuth: () => {
-        // set({ status: 'loading' });
+        set({ status: 'loading' });
         onAuthStateChanged(auth, async (user) => {
           if (user) {
             set({ user, status: 'authenticated' });
@@ -87,6 +90,7 @@ export interface FirestoreState {
   documents: AlfajorSpringProps[];
   loading: boolean;
   error: string | null;
+  success: string | null;
   fetchDocuments: () => Promise<void>;
   updateDocument: (
     id: string,
@@ -101,9 +105,9 @@ export const useFirestoreStore = create(
       documents: [],
       loading: false,
       error: null,
+      success: null,
       fetchDocuments: async () => {
         set({ loading: true, error: null });
-        console.log('fetchDocuments');
         try {
           const querySnapshot = await getDocs(collection(db, 'alfajor-user'));
           const docs = querySnapshot.docs.map((doc) => {
@@ -133,7 +137,12 @@ export const useFirestoreStore = create(
             } as AlfajorSpringProps;
           });
 
-          set({ documents: docs, loading: false });
+          set({
+            documents: docs,
+            loading: false,
+            error: null,
+            success: 'Se obtuvieron los registros',
+          });
         } catch (err) {
           console.log(err);
           if (err instanceof Error) {

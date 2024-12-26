@@ -1,25 +1,25 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../store';
+import { Notyf } from 'notyf';
 
 export const LoginPage = () => {
   const navigate = useNavigate();
-
+  const notyf = new Notyf();
   const onNavigateReport = () => {
-    navigate('/statistics');
+    navigate('/page');
   };
   const { checkAuth, singInWithGoogle } = useAuthStore();
   const startGoogleSignIn = async () => {
     checkAuth();
     const result = await singInWithGoogle();
-    console.log('result', result);
-    // if (!result.ok) {
-    //   notyf.error(result.errorMessage);
-    //   return dispatch(logout(result.errorMessage));
-    // } else {
-    //   notyf.success('Sesión iniciada!');
-    //   dispatch(login(result));
-    // }
+    if (result === 'ok') {
+      notyf.success('Bienvenido');
+      onNavigateReport();
+    } else {
+      notyf.error('Error al iniciar sesión');
+    }
   };
+
   return (
     <>
       <div className="flex flex-row items-center h-[100vh] bg-pink-100">
