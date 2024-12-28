@@ -24,18 +24,6 @@ export const NavBar = () => {
             Sprint Actual
           </p>
         </button>
-        {/* <button className="p-3  w-[120px] flex flex-col items-center group">
-          <div className="flex group-hover:bg-pinkberry rounded-md p-3">
-            <img
-              className="h-10 w-10 "
-              src="../icons/dulces-suenos.png"
-              alt=""
-            />
-          </div>
-          <p className="text-center text-black text-[13px]	mt-1 font-semibold">
-            Historial
-          </p>
-        </button> */}
       </ul>
       <div className="absolute bottom-0 w-full p-3">
         <button

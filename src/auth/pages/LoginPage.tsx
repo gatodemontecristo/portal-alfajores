@@ -23,12 +23,12 @@ export const LoginPage = () => {
   return (
     <>
       <div className="flex flex-row items-center h-[100vh] bg-pink-100">
-        <div className="flex flex-col w-1/3 ">
+        <div className="flex flex-col md:w-1/3 w-full md:opacity-100 opacity-30">
           <img src="../big/red_alfajor.jpg" className="h-[100vh]" alt="logo" />
         </div>
 
-        <div className="flex justify-center flex-row w-2/3">
-          <div className="flex flex-col w-1/3 ">
+        <div className="flex justify-center flex-row md:w-2/3 w-full md:relative absolute">
+          <div className="flex flex-col md:w-1/3 w-2/3">
             <h2 className="text-pink-600 font-bold text-3xl mb-3">
               Login Page
             </h2>
