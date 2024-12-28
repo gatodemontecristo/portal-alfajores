@@ -109,13 +109,24 @@ export const UserModals = ({ isOpen, onClose }: ModalProps) => {
                     onChange={handleCheckboxChange}
                     className="form-checkbox ms-2 h-5 w-5 bg-orange-500 text-orange-500 border-2 border-orange-500 rounded focus:ring-0 focus:outline-none"
                   />
-                  <p className="text-sm">Supertarde?</p>
+                  <div className="flex flex-col">
+                    <p className="text-sm">Supertarde?</p>
+                  </div>
                 </div>
               </div>
 
               <button
                 type="submit"
-                className="text-gray-500 hover:text-gray-700 flex gap-2"
+                className="text-gray-500 hover:text-gray-700 md:flex hidden gap-2 "
+              >
+                <i className="bi bi-plus-circle"></i>
+                Agregar
+              </button>
+            </div>
+            <div className="flex flex-row justify-end md:hidden ">
+              <button
+                type="submit"
+                className="text-gray-500 hover:text-gray-700 flex gap-2 "
               >
                 <i className="bi bi-plus-circle"></i>
                 Agregar
