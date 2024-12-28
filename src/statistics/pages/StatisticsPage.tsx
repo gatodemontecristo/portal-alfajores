@@ -16,7 +16,7 @@ import {
   mapUsersDonnut,
 } from '../../utils';
 import Carousel from './Carousel';
-import { useAlfajorStore, useFirestoreStore } from '../../store';
+import { useAlfajorStore, useAuthStore, useFirestoreStore } from '../../store';
 import {
   AlfajorSpringProps,
   AlfajorSpringUserProps,
@@ -58,10 +58,12 @@ export const StatisticsPage = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
-
-  const handleOpenModal = (user: AlfajorSpringUserProps) => {
-    setAlfajor(user);
-    setIsModalOpen(true);
+  const { status } = useAuthStore();
+  const handleOpenModal = (alfajorUser: AlfajorSpringUserProps) => {
+    if (status === 'authenticated') {
+      setAlfajor(alfajorUser);
+      setIsModalOpen(true);
+    }
   };
 
   const handleCloseModal = () => {
