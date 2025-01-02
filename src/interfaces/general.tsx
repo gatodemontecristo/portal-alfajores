@@ -1,5 +1,6 @@
 import { ReactElement } from 'react';
 import { TableHeaderProps } from '../statistics/components/TableInfo/TableHeader';
+import { UserListProps } from '../statistics/components/User/UserModal/UserList';
 
 export interface DataTagsProps {
   date: string;
@@ -34,6 +35,19 @@ export interface UserAlertProps {
   children?: ReactElement | ReactElement[];
 }
 
+export interface UserModalContextProps {
+  onClose: () => void;
+  loading: boolean;
+}
+
+export interface UserModalEditPros {
+  handleSubmit: () => void;
+  children?: ReactElement | ReactElement[];
+  onClose: () => void;
+  loading: boolean;
+  isOpen: boolean;
+}
+
 export interface TableInfoContextProps {
   title: string;
   dataBody: DataHistoryProps[] | null;
@@ -52,6 +66,17 @@ export interface UserAlertHOCProps {
   Image: () => JSX.Element;
   Info: () => JSX.Element;
   Date: () => JSX.Element;
+}
+
+export interface UserModalHOCProps {
+  ({
+    children,
+    handleSubmit,
+    onClose,
+    loading,
+  }: UserModalEditPros): JSX.Element;
+  Tittle: () => JSX.Element;
+  List: ({ deleteAssistance }: UserListProps) => JSX.Element;
 }
 
 export interface TableStructureHOCProps {
