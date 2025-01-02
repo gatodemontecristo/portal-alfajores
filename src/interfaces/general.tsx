@@ -2,6 +2,7 @@ import { ReactElement } from 'react';
 import { TableHeaderProps } from '../statistics/components/TableInfo/TableHeader';
 import { UserListProps } from '../statistics/components/User/UserModal/UserList';
 import { UseFormProps } from '../statistics/components/User/UserModal/UseForm';
+import { UserButtonsProps } from '../statistics/components/User/UserModal/UserButtons';
 
 export interface DataTagsProps {
   date: string;
@@ -83,6 +84,7 @@ export interface UserModalHOCProps {
     isChecked,
     handleCheckboxChange,
   }: UseFormProps) => JSX.Element;
+  Buttons: ({ handleUpdateUser }: UserButtonsProps) => JSX.Element;
 }
 
 export interface TableStructureHOCProps {

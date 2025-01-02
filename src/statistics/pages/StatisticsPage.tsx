@@ -58,7 +58,6 @@ export const StatisticsPage = () => {
   }, [documents]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
   const { status } = useAuthStore();
   const handleOpenModal = (alfajorUser: AlfajorSpringUserProps) => {
     if (status === 'authenticated') {
@@ -87,6 +86,7 @@ export const StatisticsPage = () => {
     handleCheckboxChange,
     isChecked,
     register,
+    handleUpdateUser,
   } = useStateModal();
   return (
     <>
@@ -228,12 +228,8 @@ export const StatisticsPage = () => {
           handleCheckboxChange={handleCheckboxChange}
         />
         <UserModalEdit.List deleteAssistance={deleteAssistance} />
+        <UserModalEdit.Buttons handleUpdateUser={handleUpdateUser} />
       </UserModalEdit>
-      {/* <UserModals
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        items={items}
-      /> */}
     </>
   );
 };

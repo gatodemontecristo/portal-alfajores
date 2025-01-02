@@ -1,6 +1,9 @@
 import { UseFormRegister } from 'react-hook-form';
-import { IFormEditAssistance } from './UserModal';
 
+export interface IFormEditAssistance {
+  dateLate: string;
+  over9: boolean;
+}
 export interface UseFormProps {
   register: UseFormRegister<IFormEditAssistance>;
   isChecked: boolean;

@@ -4,7 +4,7 @@ import { formatDateToMMDD } from '../utils';
 import { AlfajorSpringTardProps } from '../interfaces';
 import { Notyf } from 'notyf';
 import { useState } from 'react';
-import { IFormEditAssistance } from '../statistics/components/User/UserModal/UserModal';
+import { IFormEditAssistance } from '../statistics/components/User/UserModal/UseForm';
 
 export const useStateModal = () => {
   const { alfajor } = useAlfajorStore();
