@@ -3,3 +3,4 @@ export * from './NavBar';
 export * from './TittleBar';
 export * from './Skeleton';
 export * from './ModalMenu';
+export * from './NavBarModule';

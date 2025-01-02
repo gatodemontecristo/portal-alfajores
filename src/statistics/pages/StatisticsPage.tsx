@@ -6,7 +6,7 @@ import {
   TableStructure,
   ToogleButton,
   UserAlert,
-  UserModals,
+  UserModalEdit,
 } from '../components';
 import { nanoid } from 'nanoid';
 import {
@@ -24,6 +24,7 @@ import {
 } from '../../interfaces';
 import { Skeleton } from '../../ui';
 import { Notyf } from 'notyf';
+import { useStateModal } from '../../hooks';
 export const StatisticsPage = () => {
   const [isLate, setIsLate] = useState(true);
   const notyf = new Notyf();
@@ -57,7 +58,6 @@ export const StatisticsPage = () => {
   }, [documents]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
   const { status } = useAuthStore();
   const handleOpenModal = (alfajorUser: AlfajorSpringUserProps) => {
     if (status === 'authenticated') {
@@ -80,7 +80,14 @@ export const StatisticsPage = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
-
+  const {
+    submitHandleForm,
+    deleteAssistance,
+    handleCheckboxChange,
+    isChecked,
+    register,
+    handleUpdateUser,
+  } = useStateModal();
   return (
     <>
       <Carousel>
@@ -207,11 +214,22 @@ export const StatisticsPage = () => {
           </TableStructure>
         </div>
       </Carousel>
-      <UserModals
+
+      <UserModalEdit
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        items={items}
-      />
+        handleSubmit={submitHandleForm}
+        loading={loading}
+      >
+        <UserModalEdit.Tittle />
+        <UserModalEdit.Form
+          register={register}
+          isChecked={isChecked}
+          handleCheckboxChange={handleCheckboxChange}
+        />
+        <UserModalEdit.List deleteAssistance={deleteAssistance} />
+        <UserModalEdit.Buttons handleUpdateUser={handleUpdateUser} />
+      </UserModalEdit>
     </>
   );
 };
