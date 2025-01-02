@@ -81,7 +81,13 @@ export const StatisticsPage = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
-  const { submitHandleForm, deleteAssistance } = useStateModal();
+  const {
+    submitHandleForm,
+    deleteAssistance,
+    handleCheckboxChange,
+    isChecked,
+    register,
+  } = useStateModal();
   return (
     <>
       <Carousel>
@@ -216,6 +222,11 @@ export const StatisticsPage = () => {
         loading={loading}
       >
         <UserModalEdit.Tittle />
+        <UserModalEdit.Form
+          register={register}
+          isChecked={isChecked}
+          handleCheckboxChange={handleCheckboxChange}
+        />
         <UserModalEdit.List deleteAssistance={deleteAssistance} />
       </UserModalEdit>
       {/* <UserModals
