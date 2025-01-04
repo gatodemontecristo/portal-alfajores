@@ -19,7 +19,12 @@ export const NavBar = () => {
     <nav className=" w-auto bg-secondary text-white hidden flex-col justify-center md:flex relative">
       <ul className="flex flex-col gap-0">
         {navBarModuleData.map((item) => (
-          <NavBarModule key={nanoid()} image={item.image} title={item.title} />
+          <NavBarModule
+            key={nanoid()}
+            image={item.image}
+            title={item.title}
+            path={item.path}
+          />
         ))}
       </ul>
       <div className="absolute bottom-0 w-full p-3">
