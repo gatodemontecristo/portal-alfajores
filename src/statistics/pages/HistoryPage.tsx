@@ -20,7 +20,27 @@ export const HistoryPage = () => {
           </div>
         </div>
 
-        <div className="w-full md:w-1/3 flex flex-col relative items-center justify-start gap-5"></div>
+        <div className="w-full md:w-1/3 flex flex-col relative items-center justify-center gap-2">
+          <div className="flex justify-center items-center w-[70px]">
+            <img src={`../big/crown.png`} alt="" />
+          </div>
+          <div className="flex w-2/3 border-solid border-[14px] border-[#fdbd22] rounded-full p-3 overflow-hidden">
+            <img src={`../people/mujer.png`} alt="" />
+          </div>
+          <div className="flex flex-col gap-2 justify-center items-center">
+            <p className="text-center text-black text-[25px] font-bold">
+              Ganador: Diana
+            </p>
+            <span
+              className={`text-center text-white text-[18px]	px-2 py-1 font-semibold rounded-3xl bg-yellow-500 w-fit`}
+            >
+              <p>Monto: S/. 50 soles</p>
+            </span>
+            <p className="text-center text-black text-[18px] font-normal">
+              Spring Q4 SP5 | 27 Nov - 10 Dec
+            </p>
+          </div>
+        </div>
         <div className="w-full md:w-1/3  p-3 h-full"></div>
       </Carousel>
     </>
