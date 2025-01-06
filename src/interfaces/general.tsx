@@ -112,5 +112,7 @@ export interface AlfajorSpringProps {
   name: string;
   open: boolean;
   range: string;
+  monto: string;
+  ganador: string;
   users: AlfajorSpringUserProps[];
 }

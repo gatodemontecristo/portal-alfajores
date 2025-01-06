@@ -4,6 +4,7 @@ import { ToogleButton, UserAlert } from '../components';
 import Carousel from './Carousel';
 import { nanoid } from 'nanoid';
 import { AlfajorSpringProps } from '../../interfaces';
+import { useFirestoreStore } from '../../store';
 
 export const HistoryPage = () => {
   const [isLate, setIsLate] = useState(true);
@@ -14,6 +15,9 @@ export const HistoryPage = () => {
     useState<AlfajorSpringProps | null>(null);
 
   const handleOpenModal = () => {};
+
+  const { documents } = useFirestoreStore();
+
   return (
     <>
       <Carousel>
@@ -22,14 +26,19 @@ export const HistoryPage = () => {
             Sprints pasados
           </p>
           <div className="flex flex-col items-center justify-start    overflow-y-scroll custom-scrollbar gap-3 w-full">
-            <div className="flex flex-row justify-between bg-slate-600 text-white p-3 rounded-md w-full">
-              <p>Spring Q4 SP5 | 27 Nov - 1111 Dec</p>
-              <i className="bi bi-caret-right-fill"></i>
-            </div>
-            <div className="flex flex-row justify-between bg-slate-600 text-white p-3 rounded-md w-full">
-              <p>Spring Q4 SP5 | 27 Nov - 22222 Dec</p>
-              <i className="bi bi-caret-right-fill"></i>
-            </div>
+            {documents
+              .filter((item) => !item.open)
+              .map((doc) => (
+                <div
+                  className="group flex flex-row justify-between bg-slate-600 text-white p-3 rounded-md w-full hover:bg-slate-500 transition-all duration-300"
+                  onClick={() => handleOpenModal(doc)}
+                >
+                  <p>
+                    {doc.name} | {doc.range}
+                  </p>
+                  <i className="bi bi-caret-right-fill transform group-hover:translate-x-[-15px] transition-all duration-300"></i>
+                </div>
+              ))}
           </div>
         </div>
 
