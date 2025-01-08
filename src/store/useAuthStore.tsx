@@ -86,6 +86,24 @@ export const useAuthStore = create(
   ),
 );
 
+export interface HistoryStoreState {
+  history: AlfajorSpringProps | null;
+  setHistory: (history: AlfajorSpringProps) => void;
+}
+export const useHistoryStore = create(
+  persist<HistoryStoreState>(
+    (set) => ({
+      history: null,
+      setHistory: (history) => {
+        set({ history });
+      },
+    }),
+    {
+      name: 'history-collection',
+    },
+  ),
+);
+
 export interface FirestoreState {
   documents: AlfajorSpringProps[];
   loading: boolean;

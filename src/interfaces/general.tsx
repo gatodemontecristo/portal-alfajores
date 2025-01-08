@@ -66,8 +66,8 @@ export interface TableInfoProps {
 export interface UserAlertHOCProps {
   ({ children, user }: UserAlertProps): JSX.Element;
   Image: () => JSX.Element;
-  Info: () => JSX.Element;
-  Date: () => JSX.Element;
+  Info: ({ disable }: { disable?: boolean }) => JSX.Element;
+  Date: ({ disable }: { disable?: boolean }) => JSX.Element;
 }
 
 export interface UserModalHOCProps {
@@ -101,6 +101,7 @@ export interface AlfajorSpringUserProps {
   genre: 'male' | 'female';
   img: string;
   name: string;
+  monto: number;
   tardanzas: AlfajorSpringTardProps[];
 }
 export interface AlfajorSpringTardProps {

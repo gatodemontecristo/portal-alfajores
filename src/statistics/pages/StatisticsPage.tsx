@@ -36,7 +36,7 @@ export const StatisticsPage = () => {
     setIsCandy(!isCandy);
   };
 
-  const { fetchDocuments, documents, error, success, loading, updateDocument } =
+  const { fetchDocuments, documents, error, success, loading } =
     useFirestoreStore();
   const { setAlfajor } = useAlfajorStore();
   const [alfajorCollection, setAlfajorCollection] =
@@ -87,7 +87,7 @@ export const StatisticsPage = () => {
     isChecked,
     register,
     handleUpdateUser,
-  } = useStateModal();
+  } = useStateModal({ idGlobal: alfajorCollection?.id || '' });
   // const onUpdateDocument = () => {
   //   console.log('documents', documents);
   //   updateDocument('oIO9oG9aICCMt1zQwqDE', documents[2]);

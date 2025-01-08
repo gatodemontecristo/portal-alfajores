@@ -33,7 +33,7 @@ export const TittleBar = () => {
             <p>Portal de los alfajores - {user?.email || 'Sin autenticar'}</p>
           </h2>
           <h2 className="text-white font-bold text-sm md:text-xl ms-0 md:ms-5 ">
-            Spring Q4 SP5 | <span className="text-sm">27 Nov - 10 Dec</span>
+            Spring Q1 SP1 | <span className="text-sm">01 Ene - 14 Ene</span>
           </h2>
         </div>
       </nav>

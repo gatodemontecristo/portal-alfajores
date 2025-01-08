@@ -15,14 +15,17 @@ const UserInfoSubTitle = ({ money }: { money: number }) => {
     </p>
   );
 };
-export const UserInfo = () => {
+
+export const UserInfo = ({ disable = true }: { disable?: boolean }) => {
   const { user } = useContext(UserContext);
   return (
     <div className="flex flex-col">
       <UserInfoTitle title={user.name}></UserInfoTitle>
-      <UserInfoSubTitle
-        money={calculateTotalAmount(user.tardanzas)}
-      ></UserInfoSubTitle>
+      {disable && (
+        <UserInfoSubTitle
+          money={calculateTotalAmount(user.tardanzas)}
+        ></UserInfoSubTitle>
+      )}
     </div>
   );
 };
