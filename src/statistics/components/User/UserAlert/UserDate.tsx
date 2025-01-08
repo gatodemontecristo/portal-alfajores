@@ -12,13 +12,26 @@ const UserDateTag = ({ item }: { item: AlfajorSpringTardProps }) => {
     </span>
   );
 };
-export const UserDate = () => {
+const UniqueTag = ({ text }: { text: string }) => {
+  return (
+    <span
+      className={`text-center text-white text-[14px]	px-3 py-2 font-semibold rounded-3xl bg-pink-600`}
+    >
+      <p>{text}</p>
+    </span>
+  );
+};
+export const UserDate = ({ disable = true }: { disable?: boolean }) => {
   const { user } = useContext(UserContext);
   return (
     <div className="flex flex-row gap-1 flex-wrap justify-center">
-      {user.tardanzas.map((item) => (
-        <UserDateTag {...{ item }} key={nanoid()}></UserDateTag>
-      ))}
+      {disable ? (
+        user.tardanzas.map((item) => (
+          <UserDateTag {...{ item }} key={nanoid()}></UserDateTag>
+        ))
+      ) : (
+        <UniqueTag text="Compitió" key={nanoid()}></UniqueTag>
+      )}
     </div>
   );
 };

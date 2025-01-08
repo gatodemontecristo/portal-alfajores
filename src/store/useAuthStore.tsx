@@ -86,6 +86,24 @@ export const useAuthStore = create(
   ),
 );
 
+export interface HistoryStoreState {
+  history: AlfajorSpringProps | null;
+  setHistory: (history: AlfajorSpringProps) => void;
+}
+export const useHistoryStore = create(
+  persist<HistoryStoreState>(
+    (set) => ({
+      history: null,
+      setHistory: (history) => {
+        set({ history });
+      },
+    }),
+    {
+      name: 'history-collection',
+    },
+  ),
+);
+
 export interface FirestoreState {
   documents: AlfajorSpringProps[];
   loading: boolean;
@@ -110,32 +128,35 @@ export const useFirestoreStore = create(
         set({ loading: true, error: null });
         try {
           const querySnapshot = await getDocs(collection(db, 'alfajor-user'));
-          const docs = querySnapshot.docs.map((doc) => {
-            const data = doc.data();
-            console.log(data);
-            return {
-              id: doc.id,
-              name: data.name,
-              open: data.open,
-              range: data.range,
-              users: data.users.map(
-                (user: AlfajorSpringUserProps, index: number) => {
-                  return {
-                    ...user,
-                    index: index,
-                    // tardanzas: user.tardanzas.map(
-                    //   (tardanza: AlfajorSpringTardProps) => {
-                    //     return {
-                    //       ...tardanza,
-                    //       fecha: new Date(tardanza.fecha).toLocaleDateString(),
-                    //     };
-                    //   },
-                    // ),
-                  };
-                },
-              ),
-            } as AlfajorSpringProps;
-          });
+          const docs = querySnapshot.docs
+            .filter((doc) => Object.keys(doc.data()).length > 0)
+            .map((doc) => {
+              const data = doc.data();
+              return {
+                id: doc.id,
+                name: data.name,
+                open: data.open,
+                range: data.range,
+                ganador: data.ganador,
+                monto: data.monto,
+                users: data.users.map(
+                  (user: AlfajorSpringUserProps, index: number) => {
+                    return {
+                      ...user,
+                      index: index,
+                      // tardanzas: user.tardanzas.map(
+                      //   (tardanza: AlfajorSpringTardProps) => {
+                      //     return {
+                      //       ...tardanza,
+                      //       fecha: new Date(tardanza.fecha).toLocaleDateString(),
+                      //     };
+                      //   },
+                      // ),
+                    };
+                  },
+                ),
+              } as AlfajorSpringProps;
+            });
 
           set({
             documents: docs,

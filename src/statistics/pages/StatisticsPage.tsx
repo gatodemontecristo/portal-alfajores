@@ -87,7 +87,11 @@ export const StatisticsPage = () => {
     isChecked,
     register,
     handleUpdateUser,
-  } = useStateModal();
+  } = useStateModal({ idGlobal: alfajorCollection?.id || '' });
+  // const onUpdateDocument = () => {
+  //   console.log('documents', documents);
+  //   updateDocument('oIO9oG9aICCMt1zQwqDE', documents[2]);
+  // };
   return (
     <>
       <Carousel>
@@ -97,11 +101,11 @@ export const StatisticsPage = () => {
               Gráficos
             </p>
             {/* <button
-            className="bg-amber-500 text-white font-bold p-2 rounded-md"
-            onClick={onUpdateDocument}
-          >
-            Actualizar
-          </button> */}
+              className="bg-amber-500 text-white font-bold p-2 rounded-md"
+              onClick={onUpdateDocument}
+            >
+              Actualizar
+            </button> */}
             <div>
               <ToogleButton
                 handleToggle={handleToggleGraphic}
@@ -127,10 +131,18 @@ export const StatisticsPage = () => {
                   <Skeleton type="circle" extraClass="w-[35vh] h-[35vh]" />
                   <Skeleton type="rect" extraClass="w-[60%] h-[30px]" />
                 </div>
-              ) : (
+              ) : alfajorCollection.users.filter(
+                  (user) => user.tardanzas.length > 0,
+                ).length > 0 ? (
                 <DonnutGraphic
                   data={mapUsersDonnut(alfajorCollection?.users || [])}
                 />
+              ) : (
+                <div className="flex flex-col items-center w-full gap-5 mt-[25%]">
+                  <p className="text-xl italic">
+                    Sin data para generar gráficos
+                  </p>
+                </div>
               )
             ) : alfajorCollection === null ? (
               <div className="flex flex-row items-end justify-center w-full gap-5 mt-[20%]">
@@ -139,10 +151,16 @@ export const StatisticsPage = () => {
                 <Skeleton type="rect" extraClass="w-[40px] h-[50vh]" />
                 <Skeleton type="rect" extraClass="w-[40px] h-[25vh]" />
               </div>
-            ) : (
+            ) : alfajorCollection.users.filter(
+                (user) => user.tardanzas.length > 0,
+              ).length > 0 ? (
               <ChocolateGraphic
                 data={mapUsersChoco(alfajorCollection?.users || [])}
               ></ChocolateGraphic>
+            ) : (
+              <div className="flex flex-col items-center w-full gap-5 mt-[25%]">
+                <p className="text-xl italic">Sin data para generar gráficos</p>
+              </div>
             )}
           </div>
         </div>
@@ -167,29 +185,39 @@ export const StatisticsPage = () => {
             </div>
           </div>
           <div className="flex flex-row items-center w-full justify-center  flex-wrap  gap-4 overflow-y-scroll custom-scrollbar">
-            {alfajorCollection === null
-              ? Array.from({ length: 6 }).map(() => (
-                  <div
-                    className="flex flex-col items-center w-1/4 gap-2 mt-[15%]"
-                    key={nanoid()}
-                  >
-                    <Skeleton type="circle" extraClass="w-[10vh] h-[10vh]" />
-                    <Skeleton type="rect" extraClass="w-full h-[25px]" />
-                  </div>
+            {alfajorCollection === null ? (
+              Array.from({ length: 6 }).map(() => (
+                <div
+                  className="flex flex-col items-center w-1/4 gap-2 mt-[15%]"
+                  key={nanoid()}
+                >
+                  <Skeleton type="circle" extraClass="w-[10vh] h-[10vh]" />
+                  <Skeleton type="rect" extraClass="w-full h-[25px]" />
+                </div>
+              ))
+            ) : alfajorCollection?.users.filter((user) =>
+                isLate ? user.tardanzas.length > 0 : user.tardanzas.length == 0,
+              ).length > 0 ? (
+              alfajorCollection?.users
+                .filter((user) =>
+                  isLate
+                    ? user.tardanzas.length > 0
+                    : user.tardanzas.length == 0,
+                )
+                .map((user) => (
+                  <UserAlert {...{ user, handleOpenModal }} key={nanoid()}>
+                    <UserAlert.Image />
+                    <UserAlert.Info />
+                    <UserAlert.Date />
+                  </UserAlert>
                 ))
-              : alfajorCollection?.users
-                  .filter((user) =>
-                    isLate
-                      ? user.tardanzas.length > 0
-                      : user.tardanzas.length == 0,
-                  )
-                  .map((user) => (
-                    <UserAlert {...{ user, handleOpenModal }} key={nanoid()}>
-                      <UserAlert.Image />
-                      <UserAlert.Info />
-                      <UserAlert.Date />
-                    </UserAlert>
-                  ))}
+            ) : (
+              <div className="flex flex-col items-center w-full gap-5 mt-[25%]">
+                <p className="text-xl italic">
+                  {`${isLate ? 'Ningún tardon :)' : 'Ningún puntual :('}`}
+                </p>
+              </div>
+            )}
           </div>
         </div>
         <div className="w-full md:w-1/3  p-3 h-full">

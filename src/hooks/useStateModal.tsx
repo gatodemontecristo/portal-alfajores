@@ -6,7 +6,7 @@ import { Notyf } from 'notyf';
 import { useState } from 'react';
 import { IFormEditAssistance } from '../statistics/components/User/UserModal/UseForm';
 
-export const useStateModal = () => {
+export const useStateModal = ({ idGlobal }: { idGlobal: string }) => {
   const { alfajor } = useAlfajorStore();
   const { setDeleteTardanza, setAddTardanza } = useAlfajorStore();
   const { documents, loading, updateDocument } = useFirestoreStore();
@@ -34,12 +34,7 @@ export const useStateModal = () => {
 
   const handleUpdateUser = () => {
     if (alfajor?.tardanzas !== undefined) {
-      updateUserField(
-        'JJ4874rwQa27IbVVR39s',
-        alfajor.index,
-        'tardanzas',
-        alfajor.tardanzas,
-      );
+      updateUserField(idGlobal, alfajor.index, 'tardanzas', alfajor.tardanzas);
     }
   };
   const handleUpdateUserTardanza = () => {

@@ -14,6 +14,10 @@ export const TableBody = () => {
             <Skeleton type="rect" extraClass="w-full h-[25px]" key={nanoid()} />
           ))}
         </div>
+      ) : dataBody.length === 0 ? (
+        <div className="flex flex-col items-center w-full gap-5 mt-[25%]">
+          <p className="text-xl italic">No hay registros</p>
+        </div>
       ) : (
         dataBody
           .sort((a, b) => {
