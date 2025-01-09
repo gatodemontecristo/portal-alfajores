@@ -1,5 +1,9 @@
 import { useState } from 'react';
-import { useAuthStore } from '../../store';
+import {
+  useAuthStore,
+  useFirestoreStore,
+  useStatisticsStore,
+} from '../../store';
 import { ModalMenu } from './ModalMenu';
 
 export const TittleBar = () => {
@@ -9,6 +13,8 @@ export const TittleBar = () => {
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
+  const { loading } = useFirestoreStore();
+  const { alfajorCollection } = useStatisticsStore();
   return (
     <>
       <nav className="w-screen bg-primary text-white flex flex-row justify-between items-center px-2 md:px-7 gap-4 md:gap-6">
@@ -32,9 +38,21 @@ export const TittleBar = () => {
           <h2 className="text-white font-bold text-sm ms-0 md:ms-0  flex flex-col md:hidden">
             <p>Portal de los alfajores - {user?.email || 'Sin autenticar'}</p>
           </h2>
-          <h2 className="text-white font-bold text-sm md:text-xl ms-0 md:ms-5 ">
-            Spring Q1 SP1 | <span className="text-sm">01 Ene - 14 Ene</span>
-          </h2>
+
+          {loading ? (
+            <span className="loader absolute top-[-10px]"></span>
+          ) : (
+            <h2 className="text-white font-bold text-sm md:text-xl ms-0 md:ms-5 ">
+              {alfajorCollection === null ? (
+                <p className="italic">--Sin sprint actual--</p>
+              ) : (
+                <p>
+                  {alfajorCollection.name} |{' '}
+                  <span className="text-sm">{alfajorCollection.range}</span>
+                </p>
+              )}
+            </h2>
+          )}
         </div>
       </nav>
       <ModalMenu {...{ isOpen, toggleModal }}></ModalMenu>
