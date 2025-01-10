@@ -16,12 +16,13 @@ import {
   mapUsersDonnut,
 } from '../../utils';
 import Carousel from './Carousel';
-import { useAlfajorStore, useAuthStore, useFirestoreStore } from '../../store';
 import {
-  AlfajorSpringProps,
-  AlfajorSpringUserProps,
-  DataHistoryProps,
-} from '../../interfaces';
+  useAlfajorStore,
+  useAuthStore,
+  useFirestoreStore,
+  useStatisticsStore,
+} from '../../store';
+import { AlfajorSpringUserProps } from '../../interfaces';
 import { Skeleton } from '../../ui';
 import { Notyf } from 'notyf';
 import { useStateModal } from '../../hooks';
@@ -39,11 +40,14 @@ export const StatisticsPage = () => {
   const { fetchDocuments, documents, error, success, loading } =
     useFirestoreStore();
   const { setAlfajor } = useAlfajorStore();
-  const [alfajorCollection, setAlfajorCollection] =
-    useState<AlfajorSpringProps | null>(null);
-  const [historyCollection, setHistoryCollection] = useState<
-    DataHistoryProps[] | null
-  >(null);
+
+  const {
+    alfajorCollection,
+    setAlfajorCollection,
+    historyCollection,
+    setHistoryCollection,
+  } = useStatisticsStore();
+
   useEffect(() => {
     fetchDocuments();
   }, [fetchDocuments]);
@@ -55,6 +59,7 @@ export const StatisticsPage = () => {
       const history = groupUsersByTardanzaFecha(collectionOpen?.users || []);
       setHistoryCollection(history);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [documents]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
