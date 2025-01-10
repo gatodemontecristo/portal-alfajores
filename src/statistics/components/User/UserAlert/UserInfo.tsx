@@ -15,6 +15,13 @@ const UserInfoSubTitle = ({ money }: { money: number }) => {
     </p>
   );
 };
+const UserDoubtSubTitle = ({ money }: { money: number }) => {
+  return (
+    <p className="text-center text-black text-[16px] font-normal">
+      {`Monto: S/.${money}`}
+    </p>
+  );
+};
 
 export const UserInfo = ({ disable = true }: { disable?: boolean }) => {
   const { user } = useContext(UserContext);
@@ -25,6 +32,9 @@ export const UserInfo = ({ disable = true }: { disable?: boolean }) => {
         <UserInfoSubTitle
           money={calculateTotalAmount(user.tardanzas)}
         ></UserInfoSubTitle>
+      )}
+      {!disable && user.monto > 0 && (
+        <UserDoubtSubTitle money={user.monto}></UserDoubtSubTitle>
       )}
     </div>
   );

@@ -6,6 +6,18 @@ import {
   DataTagsProps,
 } from '../interfaces';
 
+export const getDeviceType = (): 'mobile' | 'tablet' | 'laptop' => {
+  const width = window.innerWidth;
+
+  if (width <= 767) {
+    return 'mobile';
+  } else if (width >= 768 && width <= 1024) {
+    return 'tablet';
+  } else {
+    return 'laptop';
+  }
+};
+
 export const calculateTotalAmount = (
   data: DataTagsProps[] | DataColumnProps[] | AlfajorSpringTardProps[],
 ): number => {

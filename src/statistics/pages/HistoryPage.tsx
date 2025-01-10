@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Skeleton } from '../../ui';
 import { ToogleButton, UserAlert } from '../components';
 import Carousel from './Carousel';
 import { nanoid } from 'nanoid';
 import { AlfajorSpringProps } from '../../interfaces';
 import { useFirestoreStore, useHistoryStore } from '../../store';
+import { Skeleton } from '../../ui';
 
 export const HistoryPage = () => {
   const [isLate, setIsLate] = useState(true);
@@ -16,6 +16,7 @@ export const HistoryPage = () => {
 
   const { documents } = useFirestoreStore();
   const { setHistory, history } = useHistoryStore();
+
   const handleSelectHistory = (item: AlfajorSpringProps) => {
     setHistory(item);
   };
@@ -35,7 +36,7 @@ export const HistoryPage = () => {
     return '../winners/gato.png';
   };
 
-  const { fetchDocuments } = useFirestoreStore();
+  const { fetchDocuments, loading } = useFirestoreStore();
   useEffect(() => {
     fetchDocuments();
   }, [fetchDocuments]);
@@ -47,19 +48,27 @@ export const HistoryPage = () => {
             Sprints pasados
           </p>
           <div className="flex flex-col items-center justify-start    overflow-y-scroll custom-scrollbar gap-3 w-full">
-            {documents
-              .filter((item) => !item.open)
-              .map((doc) => (
-                <div
-                  className="group flex flex-row justify-between bg-slate-600 text-white p-3 rounded-md w-full hover:bg-slate-500 transition-all duration-300"
-                  onClick={() => handleSelectHistory(doc)}
-                >
-                  <p>
-                    {doc.name} | {doc.range}
-                  </p>
-                  <i className="bi bi-caret-right-fill transform group-hover:translate-x-[-15px] transition-all duration-300"></i>
-                </div>
-              ))}
+            {!loading ? (
+              documents
+                .filter((item) => !item.open)
+                .map((doc) => (
+                  <div
+                    className={`group flex flex-row justify-between  text-white p-3 rounded-md w-full transition-all duration-300 ${history?.name === doc.name ? 'bg-orange-500' : 'bg-slate-600 hover:bg-slate-500'} `}
+                    onClick={() => handleSelectHistory(doc)}
+                  >
+                    <p>
+                      {doc.name} | {doc.range}
+                    </p>
+                    <i className="bi bi-caret-right-fill transform group-hover:translate-x-[-15px] transition-all duration-300"></i>
+                  </div>
+                ))
+            ) : (
+              <div className="flex flex-col items-center justify-start w-full gap-3">
+                <Skeleton type="rect" extraClass="w-full h-[40px]" />
+                <Skeleton type="rect" extraClass="w-full h-[40px]" />
+                <Skeleton type="rect" extraClass="w-full h-[40px]" />
+              </div>
+            )}
           </div>
         </div>
 
@@ -114,15 +123,11 @@ export const HistoryPage = () => {
           </div>
           <div className="flex flex-row items-center w-full justify-center  flex-wrap  gap-4 overflow-y-scroll custom-scrollbar">
             {history === null ? (
-              Array.from({ length: 6 }).map(() => (
-                <div
-                  className="flex flex-col items-center w-1/4 gap-2 mt-[15%]"
-                  key={nanoid()}
-                >
-                  <Skeleton type="circle" extraClass="w-[10vh] h-[10vh]" />
-                  <Skeleton type="rect" extraClass="w-full h-[25px]" />
-                </div>
-              ))
+              <div className="flex flex-col items-center w-full gap-5 mt-[25%] p-5 text-center">
+                <p className="text-xl italic">
+                  {`Selecciona un sprint para ver los participantes`}
+                </p>
+              </div>
             ) : history?.users.filter((user) =>
                 isLate ? user.monto > 0 : user.monto == 0,
               ).length > 0 ? (
