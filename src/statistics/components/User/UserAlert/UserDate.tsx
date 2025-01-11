@@ -29,6 +29,8 @@ export const UserDate = ({ disable = true }: { disable?: boolean }) => {
         user.tardanzas.map((item) => (
           <UserDateTag {...{ item }} key={nanoid()}></UserDateTag>
         ))
+      ) : user.monto > 0 ? (
+        <UniqueTag text="Pagó" key={nanoid()}></UniqueTag>
       ) : (
         <UniqueTag text="Compitió" key={nanoid()}></UniqueTag>
       )}

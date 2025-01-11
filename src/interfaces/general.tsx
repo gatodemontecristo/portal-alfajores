@@ -18,6 +18,10 @@ export interface DataHistoryProps {
   fecha: string;
   users: DataColumnProps[];
 }
+
+export interface UserBigProps {
+  children?: ReactElement | ReactElement[];
+}
 export interface UserProps {
   user: string;
   genre: 'male' | 'female';
@@ -68,6 +72,13 @@ export interface UserAlertHOCProps {
   Image: () => JSX.Element;
   Info: ({ disable }: { disable?: boolean }) => JSX.Element;
   Date: ({ disable }: { disable?: boolean }) => JSX.Element;
+}
+
+export interface UserBigHOCProps {
+  ({ children }: UserBigProps): JSX.Element;
+  Icon: () => JSX.Element;
+  Image: () => JSX.Element;
+  Info: () => JSX.Element;
 }
 
 export interface UserModalHOCProps {

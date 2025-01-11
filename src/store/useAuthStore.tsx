@@ -88,7 +88,7 @@ export const useAuthStore = create(
 
 export interface HistoryStoreState {
   history: AlfajorSpringProps | null;
-  setHistory: (history: AlfajorSpringProps) => void;
+  setHistory: (history: AlfajorSpringProps | null) => void;
 }
 export const useHistoryStore = create(
   persist<HistoryStoreState>(

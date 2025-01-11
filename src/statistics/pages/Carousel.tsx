@@ -1,4 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { useHistoryStore } from '../../store';
+import { getDeviceType } from '../../utils';
 interface CarouselProps {
   children: React.ReactNode;
 }
@@ -7,6 +9,13 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const { history } = useHistoryStore();
+
+  useEffect(() => {
+    const device = getDeviceType();
+    if (device === 'mobile') scrollRight();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [history]);
 
   useEffect(() => {
     const handleResize = () => {
