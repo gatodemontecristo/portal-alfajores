@@ -17,8 +17,14 @@ export const UserImage = () => {
     return '../winners/gato.png';
   };
   return (
-    <div className="flex w-2/3 border-solid border-[14px] border-[#fdbd22] rounded-full p-3 overflow-hidden">
-      <img src={getWinnerImg({ ganador: history?.ganador })} alt="" />
+    <div
+      className={`flex w-2/3 border-solid border-[14px] ${history?.ganador === 'Navidad' ? 'border-[#EF4444]' : 'border-[#fdbd22]'}  rounded-full p-3 overflow-hidden`}
+    >
+      <img
+        className="rounded-full"
+        src={getWinnerImg({ ganador: history?.ganador })}
+        alt=""
+      />
     </div>
   );
 };

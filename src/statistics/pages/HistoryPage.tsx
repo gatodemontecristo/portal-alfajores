@@ -24,6 +24,8 @@ export const HistoryPage = () => {
   const { fetchDocuments, loading } = useFirestoreStore();
   useEffect(() => {
     fetchDocuments();
+    setHistory(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchDocuments]);
   return (
     <>
