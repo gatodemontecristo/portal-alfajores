@@ -1,5 +1,24 @@
-import React from 'react';
+import { useHistoryStore } from '../../../../store';
 
 export const UserImage = () => {
-  return <div>UserImage</div>;
+  const { history } = useHistoryStore();
+  const getWinnerImg = ({ ganador }: { ganador: string | undefined }) => {
+    const winner = history?.users.find(
+      (user) => user.name === history?.ganador,
+    );
+    if (ganador === 'Navidad') return '../winners/navidad.png';
+    else if (winner)
+      return winner.img === ''
+        ? winner.genre === 'female'
+          ? '../people/mujer.png'
+          : '../people/hombre.png'
+        : winner.img;
+
+    return '../winners/gato.png';
+  };
+  return (
+    <div className="flex w-2/3 border-solid border-[14px] border-[#fdbd22] rounded-full p-3 overflow-hidden">
+      <img src={getWinnerImg({ ganador: history?.ganador })} alt="" />
+    </div>
+  );
 };

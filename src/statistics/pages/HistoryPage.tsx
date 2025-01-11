@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ToogleButton, UserAlert } from '../components';
+import { ToogleButton, UserAlert, UserBig } from '../components';
 import Carousel from './Carousel';
 import { nanoid } from 'nanoid';
 import { AlfajorSpringProps } from '../../interfaces';
@@ -19,21 +19,6 @@ export const HistoryPage = () => {
 
   const handleSelectHistory = (item: AlfajorSpringProps) => {
     setHistory(item);
-  };
-
-  const getWinnerImg = ({ ganador }: { ganador: string | undefined }) => {
-    const winner = history?.users.find(
-      (user) => user.name === history?.ganador,
-    );
-    if (ganador === 'Navidad') return '../winners/navidad.png';
-    else if (winner)
-      return winner.img === ''
-        ? winner.genre === 'female'
-          ? '../people/mujer.png'
-          : '../people/hombre.png'
-        : winner.img;
-
-    return '../winners/gato.png';
   };
 
   const { fetchDocuments, loading } = useFirestoreStore();
@@ -73,44 +58,11 @@ export const HistoryPage = () => {
         </div>
 
         <div className="w-full md:w-1/3 flex flex-col relative items-center justify-center gap-2">
-          <div className="flex justify-center items-center w-[70px]">
-            <img src={`../big/crown.png`} alt="" />
-          </div>
-          <div className="flex w-2/3 border-solid border-[14px] border-[#fdbd22] rounded-full p-3 overflow-hidden">
-            <img src={getWinnerImg({ ganador: history?.ganador })} alt="" />
-          </div>
-
-          <div className="flex flex-col gap-2 justify-center items-center">
-            {history === null ? (
-              <>
-                <p className="text-center text-black text-[25px] font-bold italic">
-                  Sin ganador
-                </p>
-                <span
-                  className={`text-center text-white text-[18px]	px-2 py-1 font-semibold rounded-3xl bg-slate-500 w-fit`}
-                >
-                  <p>Sin monto (?)</p>
-                </span>
-                <p className="text-center text-black text-[18px] font-normal italic">
-                  -- Sprint sin seleccionar --
-                </p>
-              </>
-            ) : (
-              <>
-                <p className="text-center text-black text-[25px] font-bold">
-                  Ganador: {history.ganador}
-                </p>
-                <span
-                  className={`text-center text-white text-[18px]	px-2 py-1 font-semibold rounded-3xl bg-yellow-500 w-fit`}
-                >
-                  <p>Monto: S/. {history?.monto} soles</p>
-                </span>
-                <p className="text-center text-black text-[18px] font-normal">
-                  {history?.name} | {history?.range}
-                </p>
-              </>
-            )}
-          </div>
+          <UserBig>
+            <UserBig.Icon />
+            <UserBig.Image />
+            <UserBig.Info />
+          </UserBig>
         </div>
         <div className="flex flex-col items-center justify-start    overflow-y-scroll custom-scrollbar gap-3 w-full md:w-1/3 ">
           <div className="flex flex-row items-center justify-evenly h-[10%] top-0  pt-[20px] w-full">
