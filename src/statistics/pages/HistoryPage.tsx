@@ -5,6 +5,7 @@ import { nanoid } from 'nanoid';
 import { AlfajorSpringProps } from '../../interfaces';
 import { useFirestoreStore, useHistoryStore } from '../../store';
 import { Skeleton } from '../../ui';
+import { useLoadImages } from '../hooks';
 
 export const HistoryPage = () => {
   const [isLate, setIsLate] = useState(true);
@@ -27,6 +28,7 @@ export const HistoryPage = () => {
     setHistory(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchDocuments]);
+  const { imagesLoaded } = useLoadImages();
   return (
     <>
       <Carousel>
@@ -76,7 +78,7 @@ export const HistoryPage = () => {
             />
           </div>
           <div className="flex flex-row items-center w-full justify-center  flex-wrap  gap-4 overflow-y-scroll custom-scrollbar">
-            {history === null ? (
+            {history === null || !imagesLoaded ? (
               <div className="flex flex-col items-center w-full gap-5 mt-[25%] p-5 text-center">
                 <p className="text-xl italic">
                   {`Selecciona un sprint para ver los participantes`}

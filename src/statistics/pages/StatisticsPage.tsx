@@ -26,6 +26,7 @@ import { AlfajorSpringUserProps } from '../../interfaces';
 import { Skeleton } from '../../ui';
 import { Notyf } from 'notyf';
 import { useStateModal } from '../../hooks';
+import { useLoadImages } from '../hooks';
 export const StatisticsPage = () => {
   const [isLate, setIsLate] = useState(true);
   const notyf = new Notyf();
@@ -97,6 +98,8 @@ export const StatisticsPage = () => {
   //   console.log('documents', documents);
   //   updateDocument('oIO9oG9aICCMt1zQwqDE', documents[2]);
   // };
+  const { imagesLoaded } = useLoadImages();
+
   return (
     <>
       <Carousel>
@@ -190,7 +193,7 @@ export const StatisticsPage = () => {
             </div>
           </div>
           <div className="flex flex-row items-center w-full justify-center  flex-wrap  gap-4 overflow-y-scroll custom-scrollbar">
-            {alfajorCollection === null ? (
+            {alfajorCollection === null || !imagesLoaded ? (
               Array.from({ length: 6 }).map(() => (
                 <div
                   className="flex flex-col items-center w-1/4 gap-2 mt-[15%]"
