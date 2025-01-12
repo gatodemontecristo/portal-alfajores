@@ -1,3 +1,19 @@
+<br />
+<div align="center">
+  <a href="https://github.com/gatodemontecristo/portal-alfajores">
+     <img src="https://github.com/gatodemontecristo/portal-alfajores/blob/onebranchtoconquerthemall/public/logo/icon.png" alt="Logo" width="80" height="80">
+  </a>
+
+<h3 align="center">Alfajor portal - Payment report vs4</h3>
+
+  <p align="center">
+    Payment report to manage money owed for late attendance, made with Typescript, React.js and Tailwind.css
+    <br />
+  </p>
+</div>
+
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
