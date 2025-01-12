@@ -12,6 +12,38 @@
   </p>
 </div>
 
+### Technologies
+
+* ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+* ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+* ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+* 	![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
+* 	![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+* 	![Netlify](https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7)
+* 	![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+* 	![React](https://img.shields.io/badge/zustand-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+* ![Firebase](https://img.shields.io/badge/firebase-a08021?style=for-the-badge&logo=firebase&logoColor=ffcd34)
+
+### Used Pages/Libraries
+
+Icons page (1) -> https://heroicons.com/
+
+Icons page (2) -> https://www.flaticon.es/icono-gratis/alfajor_4457051
+
+Mockups page -> https://shots.so/
+
+Identifiers generator -> https://www.npmjs.com/package/uuid
+
+Zustand -> https://zustand-demo.pmnd.rs/
+
+### Desktop screenshots
+
+![image](https://github.com/user-attachments/assets/1de20bb2-1823-4559-9cb8-f87486dcc10d)
+![image](https://github.com/user-attachments/assets/4a19953b-45c5-4baa-8051-90f9de4b870c)
+
+### Mobile screenshots
+
+![image](https://github.com/user-attachments/assets/8784aed4-0518-4af5-9951-8b58fbf4be08)
 
 
 # React + TypeScript + Vite
