@@ -27,8 +27,6 @@ export const useStateModal = ({ idGlobal }: { idGlobal: string }) => {
         ...updatedUsers[userIndex],
         [field]: value,
       };
-      console.log('documentId', documentId);
-      console.log('updatedUsers', updatedUsers);
       await updateDocument(documentId, { users: updatedUsers });
     }
   };
