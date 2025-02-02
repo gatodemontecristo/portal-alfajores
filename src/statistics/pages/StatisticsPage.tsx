@@ -96,7 +96,7 @@ export const StatisticsPage = () => {
   } = useStateModal({ idGlobal: alfajorCollection?.id || '' });
   // const onUpdateDocument = () => {
   //   console.log('documents', documents);
-  //   updateDocument('oIO9oG9aICCMt1zQwqDE', documents[2]);
+  //   //updateDocument('gHUyaoFNK84nOx7deRfA', documents[3]);
   // };
   const { imagesLoaded } = useLoadImages();
 
