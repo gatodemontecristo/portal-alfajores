@@ -139,19 +139,12 @@ export const useFirestoreStore = create(
                 range: data.range,
                 ganador: data.ganador,
                 monto: data.monto,
+                fecha: data.fecha,
                 users: data.users.map(
                   (user: AlfajorSpringUserProps, index: number) => {
                     return {
                       ...user,
                       index: index,
-                      // tardanzas: user.tardanzas.map(
-                      //   (tardanza: AlfajorSpringTardProps) => {
-                      //     return {
-                      //       ...tardanza,
-                      //       fecha: new Date(tardanza.fecha).toLocaleDateString(),
-                      //     };
-                      //   },
-                      // ),
                     };
                   },
                 ),

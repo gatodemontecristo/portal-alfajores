@@ -7,6 +7,15 @@ import { useFirestoreStore, useHistoryStore } from '../../store';
 import { Skeleton } from '../../ui';
 import { useLoadImages } from '../hooks';
 
+const compareDates = (a: string, b: string): number => {
+  const [dayA, monthA, yearA] = a.split('/').map(Number);
+  const [dayB, monthB, yearB] = b.split('/').map(Number);
+
+  const dateA = new Date(yearA, monthA - 1, dayA);
+  const dateB = new Date(yearB, monthB - 1, dayB);
+
+  return dateB.getTime() - dateA.getTime();
+};
 export const HistoryPage = () => {
   const [isLate, setIsLate] = useState(true);
   const handleToggle = () => {
@@ -39,6 +48,7 @@ export const HistoryPage = () => {
           <div className="flex flex-col items-center justify-start    overflow-y-scroll custom-scrollbar gap-3 w-full">
             {!loading ? (
               documents
+                .sort((a, b) => compareDates(a.fecha, b.fecha))
                 .filter((item) => !item.open)
                 .map((doc) => (
                   <HistoryButton
