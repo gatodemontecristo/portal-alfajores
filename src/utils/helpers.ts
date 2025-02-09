@@ -5,6 +5,7 @@ import {
   DataHistoryProps,
   DataTagsProps,
 } from '../interfaces';
+import { specialDates } from './staticData';
 
 export const getDeviceType = (): 'mobile' | 'tablet' | 'laptop' => {
   const width = window.innerWidth;
@@ -20,9 +21,11 @@ export const getDeviceType = (): 'mobile' | 'tablet' | 'laptop' => {
 
 export const calculateTotalAmount = (
   data: DataTagsProps[] | DataColumnProps[] | AlfajorSpringTardProps[],
+  range: string,
 ): number => {
+  const validSpecial = specialDates.find((date) => date === range);
   return data.reduce((total, item) => {
-    return total + (item.over9 ? 10 : 5);
+    return validSpecial ? total + 8 : total + (item.over9 ? 10 : 5);
   }, 0);
 };
 
@@ -34,40 +37,51 @@ export const formatDateToMMDD = (dateString: string): string => {
 const calculateTotalByHour = (
   data: DataTagsProps[] | DataColumnProps[] | AlfajorSpringTardProps[],
   over: boolean,
+  range: string,
 ): number => {
+  const validSpecial = specialDates.find((date) => date === range);
   return data.reduce((total, item) => {
-    return over ? total + (item.over9 ? 10 : 0) : total + (item.over9 ? 0 : 5);
+    return over
+      ? total + (item.over9 ? (validSpecial ? 8 : 10) : 0)
+      : total + (item.over9 ? 0 : 5);
   }, 0);
 };
 
 export const calculateFinalAmount = (
   alfajorCollection: AlfajorSpringUserProps[],
+  range: string,
 ): number => {
   return alfajorCollection.reduce((total, item) => {
-    return total + calculateTotalAmount(item.tardanzas);
+    return total + calculateTotalAmount(item.tardanzas, range);
   }, 0);
 };
-export const mapUsersDonnut = (alfajorCollection: AlfajorSpringUserProps[]) => {
+export const mapUsersDonnut = (
+  alfajorCollection: AlfajorSpringUserProps[],
+  range: string,
+) => {
   return alfajorCollection
     .filter((user) => user.tardanzas.length > 0)
     .map((user) => {
       return {
         id: user.name,
         label: user.name,
-        value: calculateTotalAmount(user.tardanzas),
+        value: calculateTotalAmount(user.tardanzas, range),
         color: user.color,
       };
     });
 };
-export const mapUsersChoco = (alfajorCollection: AlfajorSpringUserProps[]) => {
+export const mapUsersChoco = (
+  alfajorCollection: AlfajorSpringUserProps[],
+  range: string,
+) => {
   return alfajorCollection
     .filter((user) => user.tardanzas.length > 0)
     .map((user) => {
       return {
         deudores: user.name,
-        over8: calculateTotalByHour(user.tardanzas, false).toString(),
+        over8: calculateTotalByHour(user.tardanzas, false, range).toString(),
         over8Color: 'hsl(112, 70%, 50%)',
-        over9: calculateTotalByHour(user.tardanzas, true).toString(),
+        over9: calculateTotalByHour(user.tardanzas, true, range).toString(),
         over9Color: 'hsl(8, 70%, 50%)',
       };
     });
