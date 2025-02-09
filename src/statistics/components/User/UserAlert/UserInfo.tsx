@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { UserContext } from './UserAlert';
 import { calculateTotalAmount } from '../../../../utils';
+import { useStatisticsStore } from '../../../../store';
 
 const UserInfoTitle = ({ title }: { title: string }) => {
   return (
@@ -25,12 +26,16 @@ const UserDoubtSubTitle = ({ money }: { money: number }) => {
 
 export const UserInfo = ({ disable = true }: { disable?: boolean }) => {
   const { user } = useContext(UserContext);
+  const { alfajorCollection } = useStatisticsStore();
   return (
     <div className="flex flex-col">
       <UserInfoTitle title={user.name}></UserInfoTitle>
       {disable && (
         <UserInfoSubTitle
-          money={calculateTotalAmount(user.tardanzas)}
+          money={calculateTotalAmount(
+            user.tardanzas,
+            alfajorCollection?.range || '',
+          )}
         ></UserInfoSubTitle>
       )}
       {!disable && user.monto > 0 && (

@@ -56,6 +56,7 @@ export const StatisticsPage = () => {
   useEffect(() => {
     const collectionOpen = documents.find((doc) => doc.open);
     if (collectionOpen) {
+      console.log('collectionOpen', collectionOpen);
       setAlfajorCollection(collectionOpen);
       const history = groupUsersByTardanzaFecha(collectionOpen?.users || []);
       setHistoryCollection(history);
@@ -143,7 +144,10 @@ export const StatisticsPage = () => {
                   (user) => user.tardanzas.length > 0,
                 ).length > 0 ? (
                 <DonnutGraphic
-                  data={mapUsersDonnut(alfajorCollection?.users || [])}
+                  data={mapUsersDonnut(
+                    alfajorCollection?.users || [],
+                    alfajorCollection?.range || '',
+                  )}
                 />
               ) : (
                 <div className="flex flex-col items-center w-full gap-5 mt-[25%]">
@@ -163,7 +167,10 @@ export const StatisticsPage = () => {
                 (user) => user.tardanzas.length > 0,
               ).length > 0 ? (
               <ChocolateGraphic
-                data={mapUsersChoco(alfajorCollection?.users || [])}
+                data={mapUsersChoco(
+                  alfajorCollection?.users || [],
+                  alfajorCollection?.range || '',
+                )}
               ></ChocolateGraphic>
             ) : (
               <div className="flex flex-col items-center w-full gap-5 mt-[25%]">
@@ -232,7 +239,10 @@ export const StatisticsPage = () => {
           <TableStructure
             title={'Historial'}
             dataBody={historyCollection}
-            result={calculateFinalAmount(alfajorCollection?.users || [])}
+            result={calculateFinalAmount(
+              alfajorCollection?.users || [],
+              alfajorCollection?.range || '',
+            )}
             key={nanoid()}
           >
             <TableStructure.Title />

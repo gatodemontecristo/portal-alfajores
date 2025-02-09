@@ -3,9 +3,10 @@ import { TableInfoContext } from './TableStructure';
 import { nanoid } from 'nanoid';
 import { calculateTotalAmount, getUsersString } from '../../../utils';
 import { Skeleton } from '../../../ui';
+import { useStatisticsStore } from '../../../store';
 export const TableBody = () => {
   const { dataBody } = useContext(TableInfoContext);
-
+  const { alfajorCollection } = useStatisticsStore();
   return (
     <div className="flex flex-col overflow-y-scroll custom-scrollbar">
       {dataBody === null ? (
@@ -35,7 +36,13 @@ export const TableBody = () => {
                   }}
                 />
               </div>
-              <p className="w-1/5">S/.{calculateTotalAmount(item.users)}</p>
+              <p className="w-1/5">
+                S/.
+                {calculateTotalAmount(
+                  item.users,
+                  alfajorCollection?.range || '',
+                )}
+              </p>
             </div>
           ))
       )}

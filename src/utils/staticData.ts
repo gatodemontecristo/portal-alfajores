@@ -24,3 +24,5 @@ export const imageUrls: string[] = [
   '../people/picachu_fbi.jpeg',
   '../people/mono.gif',
 ];
+
+export const specialDates: string[] = ['26 Ene - 11 Feb', '26 Ene - 11 Feb'];
