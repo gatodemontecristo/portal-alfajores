@@ -6,6 +6,7 @@ import { AlfajorSpringProps } from '../../interfaces';
 import { useFirestoreStore, useHistoryStore } from '../../store';
 import { Skeleton } from '../../ui';
 import { useLoadImages } from '../hooks';
+import JSConfetti from 'js-confetti';
 
 const compareDates = (a: string, b: string): number => {
   const [dayA, monthA, yearA] = a.split('/').map(Number);
@@ -23,12 +24,13 @@ export const HistoryPage = () => {
   };
 
   const handleOpenModal = () => {};
-
+  const jsConfetti = new JSConfetti();
   const { documents } = useFirestoreStore();
   const { setHistory, history } = useHistoryStore();
 
   const handleSelectHistory = (item: AlfajorSpringProps) => {
     setHistory(item);
+    jsConfetti.addConfetti();
   };
 
   const { fetchDocuments, loading } = useFirestoreStore();
