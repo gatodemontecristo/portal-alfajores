@@ -41,7 +41,7 @@ export const StatisticsPage = () => {
   const { fetchDocuments, documents, error, success, loading } =
     useFirestoreStore();
   const { setAlfajor } = useAlfajorStore();
-
+  console.log('documents', documents);
   const {
     alfajorCollection,
     setAlfajorCollection,
@@ -97,7 +97,7 @@ export const StatisticsPage = () => {
   } = useStateModal({ idGlobal: alfajorCollection?.id || '' });
   // const onUpdateDocument = () => {
   //   console.log('documents', documents);
-  //   updateDocument('GRYNNLR7CQBH5fhFuyYG', documents[3]);
+  //   updateDocument('uC2umZKnx7lhMiFnl7u5', documents[3]);
   // };
   const { imagesLoaded } = useLoadImages();
 

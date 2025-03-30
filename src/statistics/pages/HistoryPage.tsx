@@ -43,7 +43,7 @@ export const HistoryPage = () => {
   return (
     <>
       <Carousel>
-        <div className="w-full md:w-1/3 relative h-full flex flex-col items-center justify-center p-10">
+        <div className="w-full md:w-1/3 relative h-full flex flex-col items-center justify-center p-10 pt-20">
           <p className="ms-10 font-extrabold text-[35px] text-[#ffb400] absolute top-0 left-0">
             Sprints pasados
           </p>

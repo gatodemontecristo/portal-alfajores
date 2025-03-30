@@ -3,7 +3,12 @@ import { useHistoryStore } from '../../../../store';
 export const UserInfo = () => {
   const { history } = useHistoryStore();
   const getTitle = () => {
-    if (history?.ganador === 'Navidad') return `Especial: ${history.ganador}`;
+    if (
+      history?.ganador === 'Navidad' ||
+      history?.ganador === 'Despedida de Renzo' ||
+      history?.ganador === 'Pase a producción whopper'
+    )
+      return `Especial: ${history.ganador}`;
     return `Ganador: ${history?.ganador}`;
   };
   return (
@@ -24,7 +29,7 @@ export const UserInfo = () => {
         </>
       ) : (
         <>
-          <p className="text-center text-black text-[25px] font-bold">
+          <p className="text-center text-black text-[25px] font-bold w-[80%]">
             {getTitle()}
           </p>
           <span

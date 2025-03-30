@@ -25,4 +25,9 @@ export const imageUrls: string[] = [
   '../people/mono.gif',
 ];
 
-export const specialDates: string[] = ['26 Ene - 11 Feb', '12 Feb - 28 Feb'];
+export const specialDates: string[] = [
+  '26 Ene - 11 Feb',
+  '12 Feb - 28 Feb',
+  '03 Mar - 17 Mar',
+  '24 Mar - 08 Abr',
+];
