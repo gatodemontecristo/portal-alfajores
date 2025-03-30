@@ -7,6 +7,10 @@ export const UserImage = () => {
       (user) => user.name === history?.ganador,
     );
     if (ganador === 'Navidad') return '../winners/navidad.png';
+    if (ganador === 'Despedida de Renzo')
+      return '../winners/especial_renzo.png';
+    if (ganador === 'Pase a producción whopper')
+      return '../winners/whopper.webp';
     else if (winner)
       return winner.img === ''
         ? winner.genre === 'female'

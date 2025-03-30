@@ -6,6 +6,7 @@ import { AlfajorSpringProps } from '../../interfaces';
 import { useFirestoreStore, useHistoryStore } from '../../store';
 import { Skeleton } from '../../ui';
 import { useLoadImages } from '../hooks';
+import JSConfetti from 'js-confetti';
 
 const compareDates = (a: string, b: string): number => {
   const [dayA, monthA, yearA] = a.split('/').map(Number);
@@ -23,12 +24,13 @@ export const HistoryPage = () => {
   };
 
   const handleOpenModal = () => {};
-
+  const jsConfetti = new JSConfetti();
   const { documents } = useFirestoreStore();
   const { setHistory, history } = useHistoryStore();
 
   const handleSelectHistory = (item: AlfajorSpringProps) => {
     setHistory(item);
+    jsConfetti.addConfetti();
   };
 
   const { fetchDocuments, loading } = useFirestoreStore();
@@ -41,7 +43,7 @@ export const HistoryPage = () => {
   return (
     <>
       <Carousel>
-        <div className="w-full md:w-1/3 relative h-full flex flex-col items-center justify-center p-10">
+        <div className="w-full md:w-1/3 relative h-full flex flex-col items-center justify-center p-10 pt-20">
           <p className="ms-10 font-extrabold text-[35px] text-[#ffb400] absolute top-0 left-0">
             Sprints pasados
           </p>
