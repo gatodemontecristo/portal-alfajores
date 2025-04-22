@@ -22,10 +22,10 @@ export const UserImage = () => {
   };
   return (
     <div
-      className={`flex w-2/3 border-solid border-[14px] ${history?.ganador === 'Navidad' ? 'border-[#EF4444]' : 'border-[#fdbd22]'}  rounded-full p-3 overflow-hidden`}
+      className={`flex w-2/3 aspect-square  border-solid border-[14px] ${history?.ganador === 'Navidad' ? 'border-[#EF4444]' : 'border-[#fdbd22]'}  rounded-full p-3 overflow-hidden`}
     >
       <img
-        className="rounded-full"
+        className="rounded-full w-full h-full object-cover"
         src={getWinnerImg({ ganador: history?.ganador })}
         alt=""
       />

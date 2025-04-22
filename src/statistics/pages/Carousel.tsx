@@ -3,9 +3,10 @@ import { useHistoryStore } from '../../store';
 import { getDeviceType } from '../../utils';
 interface CarouselProps {
   children: React.ReactNode;
+  page: string;
 }
 
-const Carousel: React.FC<CarouselProps> = ({ children }) => {
+const Carousel: React.FC<CarouselProps> = ({ children, page }) => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -13,7 +14,8 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
 
   useEffect(() => {
     const device = getDeviceType();
-    if (device === 'mobile') scrollRight();
+    if (device === 'mobile' && history?.ganador && page === 'HistoryPage')
+      scrollRight();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [history]);
 
@@ -47,6 +49,9 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
         currentIndex + 1,
         React.Children.count(children) - 1,
       );
+      console.log('newIndex', newIndex);
+      console.log('children', React.Children.count(children));
+      console.log('currentIndex', currentIndex);
       setCurrentIndex(newIndex);
       carouselRef.current.scrollTo({
         left: carouselRef.current.clientWidth * newIndex,
