@@ -9,6 +9,10 @@ export const UserImage = () => {
     if (ganador === 'Navidad') return '../winners/navidad.png';
     if (ganador === 'Despedida de Renzo')
       return '../winners/especial_renzo.png';
+    if (ganador === 'Final de temporada en Chillis')
+      return '../winners/especial_chilis.png';
+    if (ganador === 'Despedida a data - cachitos')
+      return '../winners/especial_cachitos.jpg';
     if (ganador === 'Pase a producción whopper')
       return '../winners/whopper.webp';
     else if (winner)
@@ -22,10 +26,10 @@ export const UserImage = () => {
   };
   return (
     <div
-      className={`flex w-2/3 border-solid border-[14px] ${history?.ganador === 'Navidad' ? 'border-[#EF4444]' : 'border-[#fdbd22]'}  rounded-full p-3 overflow-hidden`}
+      className={`flex w-2/3 aspect-square  border-solid border-[14px] ${history?.ganador === 'Navidad' ? 'border-[#EF4444]' : 'border-[#fdbd22]'}  rounded-full p-3 overflow-hidden`}
     >
       <img
-        className="rounded-full"
+        className="rounded-full w-full h-full object-cover"
         src={getWinnerImg({ ganador: history?.ganador })}
         alt=""
       />

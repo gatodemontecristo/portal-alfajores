@@ -54,7 +54,9 @@ export const StatisticsPage = () => {
   }, [fetchDocuments]);
 
   useEffect(() => {
-    const collectionOpen = documents.find((doc) => doc.open);
+    const collectionOpen = documents.find(
+      (doc) => doc.range === '24 Mar - 08 Abr',
+    );
     if (collectionOpen) {
       console.log('collectionOpen', collectionOpen);
       setAlfajorCollection(collectionOpen);
@@ -97,13 +99,14 @@ export const StatisticsPage = () => {
   } = useStateModal({ idGlobal: alfajorCollection?.id || '' });
   // const onUpdateDocument = () => {
   //   console.log('documents', documents);
-  //   updateDocument('uC2umZKnx7lhMiFnl7u5', documents[3]);
+  //   console.log('documents', documents[8]);
+  //   updateDocument('ek4N55WHOhAhGWSp6PZp', documents[8]);
   // };
   const { imagesLoaded } = useLoadImages();
 
   return (
     <>
-      <Carousel>
+      <Carousel page="StatisticsPage">
         <div className="w-full md:w-1/3 relative h-full">
           <div className=" flex flex-row justify-between w-full top-0 right-0 pt-[20px] z-50 px-5 h-[10%]  ">
             <p className="ms-5 font-extrabold text-[35px] text-[#ffb400] ">

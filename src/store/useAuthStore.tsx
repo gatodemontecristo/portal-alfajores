@@ -90,19 +90,12 @@ export interface HistoryStoreState {
   history: AlfajorSpringProps | null;
   setHistory: (history: AlfajorSpringProps | null) => void;
 }
-export const useHistoryStore = create(
-  persist<HistoryStoreState>(
-    (set) => ({
-      history: null,
-      setHistory: (history) => {
-        set({ history });
-      },
-    }),
-    {
-      name: 'history-collection',
-    },
-  ),
-);
+export const useHistoryStore = create<HistoryStoreState>((set) => ({
+  history: null,
+  setHistory: (history) => {
+    set({ history });
+  },
+}));
 
 export interface FirestoreState {
   documents: AlfajorSpringProps[];
